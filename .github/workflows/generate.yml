@@ -1,0 +1,148 @@
+name: Regenerate
+
+on:
+  # Fired by the docs repository when openapi.json changes
+  repository_dispatch:
+    types: [openapi-updated]
+  workflow_dispatch:
+    inputs:
+      force_publish:
+        description: 'Bump and publish even if the spec is unchanged'
+        type: boolean
+        default: false
+  schedule:
+    # Daily safety net in case a dispatch is missed
+    - cron: '40 4 * * *'
+
+concurrency:
+  group: regenerate-cli
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    name: Regenerate from OpenAPI
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      # Lets npm verify publishes via Trusted Publishing (OIDC) - no token needed
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      # No registry-url here: it writes a token-based .npmrc auth entry, and
+      # publishing authenticates via Trusted Publishing (OIDC) instead.
+      # Node 24 bundles an npm new enough for Trusted Publishing.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Show npm version
+        run: npm --version
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Update SDK dependency to latest
+        run: npm install @smartlyqofficial/node@latest
+
+      - name: Fetch latest OpenAPI spec
+        run: npm run fetch-spec
+
+      - name: Generate commands
+        run: npm run generate
+
+      - name: Generate README reference
+        run: npm run generate:readme
+
+      - name: Generate command tests
+        run: npm run generate:tests
+
+      - name: Build
+        run: npm run build
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Run tests
+        run: npm test
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git add -A
+          if ! git diff --staged --quiet || [ "${{ inputs.force_publish }}" = "true" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Bump version and commit
+        if: steps.changes.outputs.has_changes == 'true'
+        id: version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          NEW_VERSION=$(npm version patch --no-git-tag-version)
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+          git add -A
+          git commit -m "chore: regenerate from OpenAPI spec
+
+          Auto-generated CLI update ($NEW_VERSION)"
+
+          # Retry with rebase to survive concurrent dispatches
+          for attempt in 1 2 3; do
+            if git push; then break; fi
+            echo "Push attempt $attempt failed; rebasing and retrying..."
+            git pull --rebase origin main
+            sleep $((attempt * 5))
+          done
+
+      # Runs unconditionally so the FIRST version publishes even with no spec
+      # delta; later no-change runs see the version on npm and skip.
+      - name: Check if version already published
+        id: check_published
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "version=${CURRENT_VERSION}" >> $GITHUB_OUTPUT
+          if npm view "@smartlyqofficial/cli@${CURRENT_VERSION}" version 2>/dev/null; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "Version ${CURRENT_VERSION} already on npm, skipping publish."
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      # Publishes via Trusted Publishing (OIDC): npm accepts this workflow's
+      # GitHub-signed identity, so no token secret is involved.
+      # NOTE: no continue-on-error. A failed publish must fail the run loudly -
+      # otherwise versions keep bumping and releases keep cutting while npm
+      # silently freezes.
+      - name: Publish to npm
+        if: steps.check_published.outputs.skip != 'true'
+        run: npm publish --access public
+
+      - name: Create GitHub Release
+        if: steps.check_published.outputs.skip != 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.check_published.outputs.version }}
+          name: v${{ steps.check_published.outputs.version }}
+          generate_release_notes: true
+          body: |
+            ## Auto-generated CLI update
+
+            This release was generated from the latest OpenAPI spec.
+
+            ```bash
+            npm install -g @smartlyqofficial/cli@${{ steps.check_published.outputs.version }}
+            ```
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

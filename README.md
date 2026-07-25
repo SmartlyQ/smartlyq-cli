@@ -1,0 +1,354 @@
+# SmartlyQ CLI
+
+[![npm](https://img.shields.io/npm/v/%40smartlyqofficial%2Fcli)](https://www.npmjs.com/package/@smartlyqofficial/cli)
+
+The official command line for the [SmartlyQ API](https://docs.smartlyq.com) - social posting and scheduling, AI content generation (articles, images, video, audio, presentations), SEO research, CRM, chatbots, and more, from one API key.
+
+Built on the official [Node.js SDK](https://www.npmjs.com/package/@smartlyqofficial/node): every SDK method is a CLI command.
+
+## Installation
+
+```bash
+npm install -g @smartlyqofficial/cli
+```
+
+Requires Node.js 18 or newer.
+
+## Login
+
+```bash
+smartlyq login
+```
+
+You are prompted for your API key (input is not echoed); it is stored in `~/.smartlyq/config.json` with owner-only permissions. Get a key from your [Developer Dashboard](https://app.smartlyq.com) - keys look like `sqk_live_xxxxxxxxxxxx` (production) or `sqk_test_xxxxxxxxxxxx` (sandbox - free simulated responses, no charges).
+
+Alternatively set `SMARTLYQ_API_KEY`, or pass `--api-key` per command. Resolution order: `--api-key` flag, then the environment variable, then the config file. `smartlyq logout` deletes the stored key.
+
+## Usage
+
+Commands mirror the SDK surface: `smartlyq <resource> <method> [pathArgs...] [flags]`.
+
+```bash
+# Who am I?
+smartlyq account get-me
+
+# Publish a social post right now
+smartlyq social create-post --data '{"text":"Hello from the SmartlyQ CLI!","account_ids":["acc_123"]}'
+
+# Generate an image with AI (returns a job)
+smartlyq images generate --data '{"prompt":"A minimalist product shot of a smart speaker"}'
+
+# Poll the job until it completes
+smartlyq jobs get job_abc123
+
+# SEO keyword research
+smartlyq seo keyword-research --data '{"keyword":"ai marketing","location":"United States"}'
+
+# List draft articles, page 2
+smartlyq articles list --query 'status=draft&page=2'
+```
+
+Request bodies can also come from a file or stdin:
+
+```bash
+smartlyq social create-post --data @post.json
+cat post.json | smartlyq social create-post --data -
+```
+
+`smartlyq --help` lists all resources, `smartlyq <resource> --help` lists its methods, and `smartlyq <resource> <method> --help` shows the path arguments and the endpoint it calls.
+
+## Flags
+
+| Flag | Description |
+| --- | --- |
+| `--data <json>` | Request body as JSON. `@file.json` reads a file, `-` reads stdin. |
+| `--query <query>` | Query parameters as `k=v&k2=v2` pairs or a JSON object. |
+| `--profile <id>` | Act on behalf of a managed Profile (sent as `X-Profile-Id`). |
+| `--idempotency-key <key>` | Idempotency key for safely retrying writes. |
+| `--api-key <key>` | API key for this invocation (overrides env and config file). |
+| `--base-url <url>` | API base URL. Defaults to `https://api.smartlyq.com/v1`. |
+| `--output <mode>` | `pretty` (indented JSON, default) or `json` (compact). |
+| `--timeout <ms>` | Request timeout in milliseconds. |
+
+Errors print to stderr as `Error <status> <code>: <message> (request <id>)` and exit with code 1.
+
+## Command Reference
+
+Full request/response documentation lives at [docs.smartlyq.com](https://docs.smartlyq.com).
+
+<!-- BEGIN GENERATED REFERENCE -->
+
+### Account
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq account get-me` | `GET /me` | Get current user profile |
+| `smartlyq account get-me-usage [--query <query>]` | `GET /me/usage` | Get usage summary |
+| `smartlyq account get-me-balance` | `GET /me/balance` | Get wallet balance |
+
+### AI Captain
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq captain send-message --data <json>` | `POST /captain/messages` | Send AI Captain message |
+| `smartlyq captain list-conversations [--query <query>]` | `GET /captain/conversations` | List AI Captain conversations |
+| `smartlyq captain get-conversation <conversation-id>` | `GET /captain/conversations/{conversation_id}` | Get AI Captain conversation |
+
+### Analytics
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq analytics get-overview [--query <query>]` | `GET /analytics/overview` | Get analytics overview |
+| `smartlyq analytics get-posts [--query <query>]` | `GET /analytics/posts` | Get post analytics |
+| `smartlyq analytics get-account <account-id> [--query <query>]` | `GET /analytics/accounts/{account_id}` | Get account analytics |
+
+### Articles
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq articles generate --data <json>` | `POST /articles/generate` | Generate article |
+| `smartlyq articles list [--query <query>]` | `GET /articles` | List articles |
+| `smartlyq articles get <article-id>` | `GET /articles/{article_id}` | Get article |
+| `smartlyq articles delete <article-id>` | `DELETE /articles/{article_id}` | Delete article |
+
+### Audio
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq audio text-to-speech --data <json>` | `POST /audio/text-to-speech` | Text to speech |
+| `smartlyq audio speech-to-text --data <json>` | `POST /audio/speech-to-text` | Speech to text |
+| `smartlyq audio get <audio-id>` | `GET /audio/{audio_id}` | Get audio |
+
+### Chatbot
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq chatbots list [--query <query>]` | `GET /chatbots` | List chatbots |
+| `smartlyq chatbots create --data <json>` | `POST /chatbots` | Create chatbot |
+| `smartlyq chatbots get <id>` | `GET /chatbots/{id}` | Get chatbot |
+| `smartlyq chatbots update <id> --data <json>` | `PATCH /chatbots/{id}` | Update chatbot |
+| `smartlyq chatbots delete <id>` | `DELETE /chatbots/{id}` | Delete chatbot |
+| `smartlyq chatbots train <id>` | `POST /chatbots/{id}/train` | Start chatbot training |
+| `smartlyq chatbots get-train-status <id>` | `GET /chatbots/{id}/train-status` | Get chatbot training status |
+| `smartlyq chatbots send-message <id> --data <json>` | `POST /chatbots/{id}/messages` | Send chatbot message |
+| `smartlyq chatbots list-conversations <id> [--query <query>]` | `GET /chatbots/{id}/conversations` | List chatbot conversations |
+| `smartlyq chatbots get-conversation-messages <id> <conv-id>` | `GET /chatbots/{id}/conversations/{conv_id}/messages` | Get conversation messages |
+
+### Comments
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq comments list [--query <query>]` | `GET /social/comments` | List comments |
+| `smartlyq comments reply-to <comment-id> --data <json>` | `POST /social/comments/{comment_id}/reply` | Reply to a comment |
+| `smartlyq comments hide <comment-id>` | `POST /social/comments/{comment_id}/hide` | Hide or unhide a comment |
+| `smartlyq comments delete <comment-id>` | `DELETE /social/comments/{comment_id}` | Delete a comment |
+
+### Content
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq content rewrite --data <json>` | `POST /content/rewrite` | Rewrite content |
+| `smartlyq content generate-caption [--data <json>]` | `POST /content/caption` | Generate a social caption |
+
+### CRM Contacts
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq contacts list [--query <query>]` | `GET /contacts` | List contacts |
+| `smartlyq contacts create --data <json>` | `POST /contacts` | Create or upsert a contact |
+| `smartlyq contacts get <id>` | `GET /contacts/{id}` | Get a contact |
+| `smartlyq contacts update <id> --data <json>` | `PATCH /contacts/{id}` | Update a contact |
+| `smartlyq contacts add-tags <id> --data <json>` | `POST /contacts/{id}/tags` | Add tags to a contact |
+| `smartlyq contacts remove-tags <id> --data <json>` | `DELETE /contacts/{id}/tags` | Remove tags from a contact |
+| `smartlyq contacts list-notes <id>` | `GET /contacts/{id}/notes` | List contact notes |
+| `smartlyq contacts add-note <id> --data <json>` | `POST /contacts/{id}/notes` | Add a note to a contact |
+| `smartlyq contacts enroll <id> --data <json>` | `POST /contacts/{id}/enroll` | Enroll a contact in an automation |
+| `smartlyq contacts add-message <id> --data <json>` | `POST /contacts/{id}/messages` | Log a message on a contact's timeline |
+
+### CRM Custom Fields
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq custom-fields list` | `GET /custom-fields` | List custom fields |
+| `smartlyq custom-fields create --data <json>` | `POST /custom-fields` | Create a custom field |
+| `smartlyq custom-fields delete <id>` | `DELETE /custom-fields/{id}` | Delete a custom field |
+
+### CRM Opportunities
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq opportunities list-pipelines` | `GET /pipelines` | List pipelines |
+| `smartlyq opportunities create-pipeline --data <json>` | `POST /pipelines` | Create a pipeline |
+| `smartlyq opportunities list [--query <query>]` | `GET /opportunities` | List opportunities |
+| `smartlyq opportunities create --data <json>` | `POST /opportunities` | Create an opportunity |
+| `smartlyq opportunities get <id>` | `GET /opportunities/{id}` | Get an opportunity |
+| `smartlyq opportunities update <id> --data <json>` | `PATCH /opportunities/{id}` | Update an opportunity |
+| `smartlyq opportunities delete <id>` | `DELETE /opportunities/{id}` | Delete an opportunity |
+| `smartlyq opportunities update-status <id> --data <json>` | `POST /opportunities/{id}/status` | Update opportunity status |
+
+### Direct Messages
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq messages list-conversations [--query <query>]` | `GET /social/conversations` | List DM conversations |
+| `smartlyq messages list <conversation-id> [--query <query>]` | `GET /social/conversations/{conversation_id}/messages` | List messages in a conversation |
+| `smartlyq messages send <conversation-id> --data <json>` | `POST /social/conversations/{conversation_id}/messages` | Send a direct message |
+| `smartlyq messages mark-conversation-read <conversation-id>` | `POST /social/conversations/{conversation_id}/read` | Mark a conversation read |
+
+### Images
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq images generate --data <json>` | `POST /images/generate` | Generate image |
+| `smartlyq images list [--query <query>]` | `GET /images` | List images |
+| `smartlyq images get <image-id>` | `GET /images/{image_id}` | Get image |
+| `smartlyq images delete <image-id>` | `DELETE /images/{image_id}` | Delete image |
+
+### Jobs
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq jobs list [--query <query>]` | `GET /jobs` | List jobs |
+| `smartlyq jobs get <job-id>` | `GET /jobs/{job_id}` | Get job |
+| `smartlyq jobs cancel <job-id> [--data <json>]` | `POST /jobs/{job_id}/cancel` | Cancel job |
+
+### Media
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq media list [--query <query>]` | `GET /media` | List media |
+| `smartlyq media get <media-id>` | `GET /media/{media_id}` | Get media |
+| `smartlyq media delete <media-id>` | `DELETE /media/{media_id}` | Delete media |
+| `smartlyq media get-upload-url --data <json>` | `POST /media/upload-url` | Get presigned upload URL |
+
+### Presentations
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq presentations generate --data <json>` | `POST /presentations/generate` | Generate presentation |
+| `smartlyq presentations list [--query <query>]` | `GET /presentations` | List presentations |
+| `smartlyq presentations get <presentation-id>` | `GET /presentations/{presentation_id}` | Get presentation |
+| `smartlyq presentations delete <presentation-id>` | `DELETE /presentations/{presentation_id}` | Delete presentation |
+
+### Profiles
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq profiles list [--query <query>]` | `GET /profiles` | List profiles |
+| `smartlyq profiles create --data <json>` | `POST /profiles` | Create a profile |
+| `smartlyq profiles get <id>` | `GET /profiles/{id}` | Get a profile |
+| `smartlyq profiles delete <id> --data <json>` | `DELETE /profiles/{id}` | Delete a profile |
+| `smartlyq profiles list-accounts <id>` | `GET /profiles/{id}/accounts` | List a profile's connected accounts |
+| `smartlyq profiles pause <id>` | `POST /profiles/{id}/pause` | Pause a profile |
+| `smartlyq profiles resume <id>` | `POST /profiles/{id}/resume` | Resume a profile |
+| `smartlyq profiles create-connect-link <id> [--data <json>]` | `POST /profiles/{id}/connect-link` | Create a hosted connect link |
+| `smartlyq profiles create-connect-url <id> <platform> [--data <json>]` | `POST /profiles/{id}/connect/{platform}` | Get a raw connect URL for one platform |
+| `smartlyq profiles get-account-billing` | `GET /me/account-billing` | Account billing summary |
+
+### SEO
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq seo keyword-research --data <json>` | `POST /seo/keyword-research` | Keyword research |
+| `smartlyq seo serp --data <json>` | `POST /seo/serp` | Live SERP lookup |
+| `smartlyq seo keyword-difficulty --data <json>` | `POST /seo/keyword-difficulty` | Keyword difficulty |
+| `smartlyq seo ranked-keywords --data <json>` | `POST /seo/ranked-keywords` | Ranked keywords (rank tracking) |
+| `smartlyq seo domain-overview --data <json>` | `POST /seo/domain-overview` | Domain rank overview |
+| `smartlyq seo competitors --data <json>` | `POST /seo/competitors` | Organic competitors |
+| `smartlyq seo backlinks-summary --data <json>` | `POST /seo/backlinks-summary` | Backlink profile summary |
+| `smartlyq seo audit --data <json>` | `POST /seo/audit` | On-page SEO audit |
+| `smartlyq seo backlink-prospects --data <json>` | `POST /seo/backlink-prospects` | Backlink prospects (link gap) |
+| `smartlyq seo referring-domains --data <json>` | `POST /seo/referring-domains` | Referring domains |
+| `smartlyq seo backlink-anchors --data <json>` | `POST /seo/backlink-anchors` | Backlink anchors |
+| `smartlyq seo spam-score --data <json>` | `POST /seo/spam-score` | Backlink spam score |
+| `smartlyq seo rank-history --data <json>` | `POST /seo/rank-history` | Historical rank overview |
+| `smartlyq seo site-audit --data <json>` | `POST /seo/site-audit` | Deep site audit |
+| `smartlyq seo brand-lookup --data <json>` | `POST /seo/brand-lookup` | AI Visibility: brand lookup |
+| `smartlyq seo prompt-explorer --data <json>` | `POST /seo/prompt-explorer` | AI Visibility: prompt explorer |
+| `smartlyq seo ai-audit --data <json>` | `POST /seo/ai-audit` | AI Visibility Audit (async) |
+
+### Shorts
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq shorts generate [--data <json>]` | `POST /shorts/generate` | Generate viral shorts from a long video |
+| `smartlyq shorts list [--query <query>]` | `GET /shorts` | List shorts jobs |
+| `smartlyq shorts get <uid>` | `GET /shorts/{uid}` | Get shorts job + clips |
+
+### Social
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq social list-accounts` | `GET /social/accounts` | List social accounts |
+| `smartlyq social list-posts [--query <query>]` | `GET /social/posts` | List social posts |
+| `smartlyq social create-post --data <json>` | `POST /social/posts` | Create post (publish immediately) |
+| `smartlyq social schedule-post --data <json>` | `POST /social/posts/schedule` | Schedule post |
+| `smartlyq social get-post <post-id>` | `GET /social/posts/{post_id}` | Get social post |
+| `smartlyq social update-post <post-id> --data <json>` | `PATCH /social/posts/{post_id}` | Update social post |
+| `smartlyq social delete-post <post-id>` | `DELETE /social/posts/{post_id}` | Delete social post |
+| `smartlyq social disconnect-account <account-id>` | `DELETE /social/accounts/{account_id}` | Disconnect a social account |
+| `smartlyq social get-account-health <account-id>` | `GET /social/accounts/{account_id}/health` | Account health |
+| `smartlyq social get-account-reconnect-url <account-id>` | `GET /social/accounts/{account_id}/reconnect-url` | Account reconnect URL |
+| `smartlyq social pause-account <account-id>` | `POST /social/accounts/{account_id}/pause` | Pause posting to an account |
+| `smartlyq social resume-account <account-id>` | `POST /social/accounts/{account_id}/resume` | Resume posting to an account |
+| `smartlyq social retry-post <post-id> --data <json>` | `POST /social/posts/{post_id}/retry` | Retry publishing a post |
+| `smartlyq social connect-account-status <platform>` | `GET /social/connect/{platform}` | Poll headless connection status |
+| `smartlyq social connect-account <platform> [--data <json>]` | `POST /social/connect/{platform}` | Start headless account connection |
+
+### URLs
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq urls shorten --data <json>` | `POST /urls/shorten` | Shorten URL |
+| `smartlyq urls list [--query <query>]` | `GET /urls` | List short URLs |
+| `smartlyq urls get <url-id>` | `GET /urls/{url_id}` | Get short URL |
+| `smartlyq urls delete <url-id>` | `DELETE /urls/{url_id}` | Delete short URL |
+| `smartlyq urls get-stats <url-id>` | `GET /urls/{url_id}/stats` | Get short URL stats |
+
+### Videos
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq videos list-models` | `GET /videos/models` | List available video models |
+| `smartlyq videos generate --data <json>` | `POST /videos/generate` | Generate video |
+| `smartlyq videos list [--query <query>]` | `GET /videos` | List videos |
+| `smartlyq videos get <video-id>` | `GET /videos/{video_id}` | Get video |
+| `smartlyq videos delete <video-id>` | `DELETE /videos/{video_id}` | Delete video |
+| `smartlyq videos generate-hook [--data <json>]` | `POST /videos/hook` | Generate a viral hook line |
+| `smartlyq videos suggest-broll --data <json>` | `POST /videos/broll-suggest` | Suggest B-roll moments |
+| `smartlyq videos suggest-emphasis --data <json>` | `POST /videos/emphasis` | Suggest on-screen emphasis |
+| `smartlyq videos generate-viral-thumbnail --data <json>` | `POST /videos/viral-thumbnail` | Generate a viral thumbnail |
+
+### Webhooks
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq webhooks list` | `GET /webhooks` | List webhooks |
+| `smartlyq webhooks create --data <json>` | `POST /webhooks` | Create webhook |
+| `smartlyq webhooks delete <id>` | `DELETE /webhooks/{id}` | Delete webhook |
+
+### Workspaces
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq workspaces list` | `GET /workspaces` | List workspaces (sub-accounts) |
+| `smartlyq workspaces create --data <json>` | `POST /workspaces` | Create a workspace (sub-account) |
+| `smartlyq workspaces bulk-action --data <json>` | `POST /workspaces/bulk` | Bulk sub-account action |
+| `smartlyq workspaces get <id>` | `GET /workspaces/{id}` | Get a workspace (sub-account) |
+| `smartlyq workspaces delete <id> --data <json>` | `DELETE /workspaces/{id}` | Delete a workspace (sub-account) |
+| `smartlyq workspaces disable-saas <id> [--data <json>]` | `POST /workspaces/{id}/disable-saas` | Disable SaaS mode for a workspace |
+| `smartlyq workspaces pause <id>` | `POST /workspaces/{id}/pause` | Pause (suspend) a workspace |
+| `smartlyq workspaces resume <id>` | `POST /workspaces/{id}/resume` | Resume a paused workspace |
+| `smartlyq workspaces get-subscription <id>` | `GET /workspaces/{id}/subscription` | Get a sub-account's subscription |
+| `smartlyq workspaces get-wallet <id>` | `GET /workspaces/{id}/wallet` | Get a sub-account's wallet balance |
+| `smartlyq workspaces list-saas-plans` | `GET /saas/plans` | List SaaS plans |
+| `smartlyq workspaces get-saas-plan <id>` | `GET /saas/plans/{id}` | Get a SaaS plan |
+<!-- END GENERATED REFERENCE -->
+
+## Regeneration
+
+This CLI is generated from the [SmartlyQ OpenAPI spec](https://docs.smartlyq.com). When the spec changes, CI regenerates the commands, README, and tests, bumps the version, and publishes to npm automatically.
+
+## License
+
+MIT
