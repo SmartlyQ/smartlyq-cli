@@ -796,6 +796,13 @@ describe('reviews', () => {
     expect(calls[0].path).toBe('/reviews/test-id/reply');
   });
 
+  it('smartlyq reviews delete-reply -> DELETE /reviews/{review_id}/reply', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('reviews', 'deleteReply'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/reviews/test-id/reply');
+  });
+
   it('smartlyq reviews sync -> POST /reviews/sync', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('reviews', 'sync'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
@@ -1311,6 +1318,27 @@ describe('social', () => {
     await dispatch(cmd('social', 'facebookPostReactions'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('GET');
     expect(calls[0].path).toBe('/social/accounts/test-id/facebook/post-reactions');
+  });
+
+  it('smartlyq social instagram-story-insights -> GET /social/accounts/{account_id}/instagram/stories/{story_id}/insights', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'instagramStoryInsights'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/instagram/stories/test-id/insights');
+  });
+
+  it('smartlyq social x-retweet -> POST /social/accounts/{account_id}/x/retweets', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'xRetweet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/accounts/test-id/x/retweets');
+  });
+
+  it('smartlyq social x-unretweet -> DELETE /social/accounts/{account_id}/x/retweets/{tweet_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'xUnretweet'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/social/accounts/test-id/x/retweets/test-id');
   });
 });
 

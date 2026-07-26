@@ -282,6 +282,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | --- | --- | --- |
 | `smartlyq reviews list [--query <query>]` | `GET /reviews` | List reviews |
 | `smartlyq reviews reply-to <review-id> --data <json>` | `POST /reviews/{review_id}/reply` | Reply to review |
+| `smartlyq reviews delete-reply <review-id>` | `DELETE /reviews/{review_id}/reply` | Delete review reply |
 | `smartlyq reviews sync [--data <json>]` | `POST /reviews/sync` | Sync reviews |
 
 ### SEO
@@ -370,6 +371,9 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social reddit-subreddit-rules <account-id> <subreddit>` | `GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}/rules` | Subreddit rules |
 | `smartlyq social instagram-stories <account-id>` | `GET /social/accounts/{account_id}/instagram/stories` | Instagram stories |
 | `smartlyq social facebook-post-reactions <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/facebook/post-reactions` | Facebook post reactions |
+| `smartlyq social instagram-story-insights <account-id> <story-id> [--query <query>]` | `GET /social/accounts/{account_id}/instagram/stories/{story_id}/insights` | Instagram story insights |
+| `smartlyq social x-retweet <account-id> --data <json>` | `POST /social/accounts/{account_id}/x/retweets` | Retweet on X |
+| `smartlyq social x-unretweet <account-id> <tweet-id>` | `DELETE /social/accounts/{account_id}/x/retweets/{tweet_id}` | Undo retweet |
 
 ### URLs
 
