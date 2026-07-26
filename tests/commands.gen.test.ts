@@ -89,6 +89,41 @@ describe('analytics', () => {
     expect(calls[0].method).toBe('GET');
     expect(calls[0].path).toBe('/analytics/accounts/test-id');
   });
+
+  it('smartlyq analytics daily-metrics -> GET /analytics/daily-metrics', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'dailyMetrics'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/daily-metrics');
+  });
+
+  it('smartlyq analytics best-time -> GET /analytics/best-time', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'bestTime'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/best-time');
+  });
+
+  it('smartlyq analytics content-decay -> GET /analytics/content-decay', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'contentDecay'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/content-decay');
+  });
+
+  it('smartlyq analytics posting-frequency -> GET /analytics/posting-frequency', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'postingFrequency'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/posting-frequency');
+  });
+
+  it('smartlyq analytics post-timeline -> GET /analytics/posts/{post_id}/timeline', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'postTimeline'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/posts/test-id/timeline');
+  });
 });
 
 describe('articles', () => {

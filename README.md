@@ -101,6 +101,11 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq analytics get-overview [--query <query>]` | `GET /analytics/overview` | Get analytics overview |
 | `smartlyq analytics get-posts [--query <query>]` | `GET /analytics/posts` | Get post analytics |
 | `smartlyq analytics get-account <account-id> [--query <query>]` | `GET /analytics/accounts/{account_id}` | Get account analytics |
+| `smartlyq analytics daily-metrics [--query <query>]` | `GET /analytics/daily-metrics` | Daily metrics |
+| `smartlyq analytics best-time [--query <query>]` | `GET /analytics/best-time` | Best time to post |
+| `smartlyq analytics content-decay [--query <query>]` | `GET /analytics/content-decay` | Content decay |
+| `smartlyq analytics posting-frequency [--query <query>]` | `GET /analytics/posting-frequency` | Posting frequency vs engagement |
+| `smartlyq analytics post-timeline <post-id>` | `GET /analytics/posts/{post_id}/timeline` | Post metric timeline |
 
 ### Articles
 
