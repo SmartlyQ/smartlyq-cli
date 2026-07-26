@@ -286,7 +286,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social get-post <post-id>` | `GET /social/posts/{post_id}` | Get social post |
 | `smartlyq social update-post <post-id> --data <json>` | `PATCH /social/posts/{post_id}` | Update social post |
 | `smartlyq social delete-post <post-id>` | `DELETE /social/posts/{post_id}` | Delete social post |
-| `smartlyq social disconnect-account <account-id>` | `DELETE /social/accounts/{account_id}` | Disconnect a social account |
+| `smartlyq social update-account <account-id> --data <json>` | `PATCH /social/accounts/{account_id}` | Rename account |
 | `smartlyq social get-account-health <account-id>` | `GET /social/accounts/{account_id}/health` | Account health |
 | `smartlyq social get-account-reconnect-url <account-id>` | `GET /social/accounts/{account_id}/reconnect-url` | Account reconnect URL |
 | `smartlyq social pause-account <account-id>` | `POST /social/accounts/{account_id}/pause` | Pause posting to an account |
@@ -294,6 +294,28 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social retry-post <post-id> --data <json>` | `POST /social/posts/{post_id}/retry` | Retry publishing a post |
 | `smartlyq social connect-account-status <platform>` | `GET /social/connect/{platform}` | Poll headless connection status |
 | `smartlyq social connect-account <platform> [--data <json>]` | `POST /social/connect/{platform}` | Start headless account connection |
+| `smartlyq social list-queues` | `GET /social/queues` | List queues |
+| `smartlyq social create-queue --data <json>` | `POST /social/queues` | Create queue |
+| `smartlyq social get-queue <queue-id>` | `GET /social/queues/{queue_id}` | Get queue |
+| `smartlyq social update-queue <queue-id> --data <json>` | `PUT /social/queues/{queue_id}` | Update queue |
+| `smartlyq social delete-queue <queue-id>` | `DELETE /social/queues/{queue_id}` | Delete queue |
+| `smartlyq social get-queue-next-slot <queue-id>` | `GET /social/queues/{queue_id}/next-slot` | Get next open slot |
+| `smartlyq social preview-queue-slots <queue-id> [--query <query>]` | `GET /social/queues/{queue_id}/preview` | Preview upcoming slots |
+| `smartlyq social unpublish-post <post-id> [--data <json>]` | `POST /social/posts/{post_id}/unpublish` | Unpublish post |
+| `smartlyq social validate-post --data <json>` | `POST /social/validate/post` | Validate post content |
+| `smartlyq social validate-media --data <json>` | `POST /social/validate/media` | Validate media URL |
+| `smartlyq social stop-post-recycle <post-id>` | `DELETE /social/posts/{post_id}/recycle` | Stop recycling |
+| `smartlyq social bulk-schedule-posts --data <json>` | `POST /social/posts/bulk` | Bulk schedule posts |
+| `smartlyq social validate-bulk-batch --data <json>` | `POST /social/posts/bulk/validate` | Validate a bulk batch |
+| `smartlyq social bulk-account-health` | `GET /social/accounts/health` | Bulk account health |
+| `smartlyq social account-follower-stats [--query <query>]` | `GET /social/accounts/follower-stats` | Follower stats |
+| `smartlyq social tiktok-creator-info <account-id>` | `GET /social/accounts/{account_id}/tiktok/creator-info` | TikTok creator info |
+| `smartlyq social move-account <account-id> --data <json>` | `POST /social/accounts/{account_id}/move` | Move account to profile |
+| `smartlyq social list-account-groups` | `GET /social/account-groups` | List account groups |
+| `smartlyq social create-account-group --data <json>` | `POST /social/account-groups` | Create account group |
+| `smartlyq social get-account-group <group-id>` | `GET /social/account-groups/{group_id}` | Get account group |
+| `smartlyq social update-account-group <group-id> --data <json>` | `PUT /social/account-groups/{group_id}` | Update account group |
+| `smartlyq social delete-account-group <group-id>` | `DELETE /social/account-groups/{group_id}` | Delete account group |
 
 ### URLs
 
@@ -325,7 +347,10 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | --- | --- | --- |
 | `smartlyq webhooks list` | `GET /webhooks` | List webhooks |
 | `smartlyq webhooks create --data <json>` | `POST /webhooks` | Create webhook |
+| `smartlyq webhooks update <id> --data <json>` | `PUT /webhooks/{id}` | Update webhook |
 | `smartlyq webhooks delete <id>` | `DELETE /webhooks/{id}` | Delete webhook |
+| `smartlyq webhooks list-logs [--query <query>]` | `GET /webhooks/logs` | List webhook delivery logs |
+| `smartlyq webhooks test <id>` | `POST /webhooks/{id}/test` | Send test webhook |
 
 ### Workspaces
 

@@ -824,10 +824,10 @@ describe('social', () => {
     expect(calls[0].path).toBe('/social/posts/test-id');
   });
 
-  it('smartlyq social disconnect-account -> DELETE /social/accounts/{account_id}', async () => {
+  it('smartlyq social update-account -> PATCH /social/accounts/{account_id}', async () => {
     const { fetchImpl, calls } = mockFetch();
-    await dispatch(cmd('social', 'disconnectAccount'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
-    expect(calls[0].method).toBe('DELETE');
+    await dispatch(cmd('social', 'updateAccount'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
     expect(calls[0].path).toBe('/social/accounts/test-id');
   });
 
@@ -878,6 +878,160 @@ describe('social', () => {
     await dispatch(cmd('social', 'connectAccount'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/social/connect/test-id');
+  });
+
+  it('smartlyq social list-queues -> GET /social/queues', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'listQueues'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/queues');
+  });
+
+  it('smartlyq social create-queue -> POST /social/queues', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'createQueue'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/queues');
+  });
+
+  it('smartlyq social get-queue -> GET /social/queues/{queue_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'getQueue'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/queues/test-id');
+  });
+
+  it('smartlyq social update-queue -> PUT /social/queues/{queue_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'updateQueue'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PUT');
+    expect(calls[0].path).toBe('/social/queues/test-id');
+  });
+
+  it('smartlyq social delete-queue -> DELETE /social/queues/{queue_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'deleteQueue'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/social/queues/test-id');
+  });
+
+  it('smartlyq social get-queue-next-slot -> GET /social/queues/{queue_id}/next-slot', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'getQueueNextSlot'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/queues/test-id/next-slot');
+  });
+
+  it('smartlyq social preview-queue-slots -> GET /social/queues/{queue_id}/preview', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'previewQueueSlots'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/queues/test-id/preview');
+  });
+
+  it('smartlyq social unpublish-post -> POST /social/posts/{post_id}/unpublish', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'unpublishPost'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/posts/test-id/unpublish');
+  });
+
+  it('smartlyq social validate-post -> POST /social/validate/post', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'validatePost'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/validate/post');
+  });
+
+  it('smartlyq social validate-media -> POST /social/validate/media', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'validateMedia'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/validate/media');
+  });
+
+  it('smartlyq social stop-post-recycle -> DELETE /social/posts/{post_id}/recycle', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'stopPostRecycle'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/social/posts/test-id/recycle');
+  });
+
+  it('smartlyq social bulk-schedule-posts -> POST /social/posts/bulk', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'bulkSchedulePosts'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/posts/bulk');
+  });
+
+  it('smartlyq social validate-bulk-batch -> POST /social/posts/bulk/validate', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'validateBulkBatch'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/posts/bulk/validate');
+  });
+
+  it('smartlyq social bulk-account-health -> GET /social/accounts/health', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'bulkAccountHealth'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/health');
+  });
+
+  it('smartlyq social account-follower-stats -> GET /social/accounts/follower-stats', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'accountFollowerStats'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/follower-stats');
+  });
+
+  it('smartlyq social tiktok-creator-info -> GET /social/accounts/{account_id}/tiktok/creator-info', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'tiktokCreatorInfo'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/tiktok/creator-info');
+  });
+
+  it('smartlyq social move-account -> POST /social/accounts/{account_id}/move', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'moveAccount'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/accounts/test-id/move');
+  });
+
+  it('smartlyq social list-account-groups -> GET /social/account-groups', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'listAccountGroups'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/account-groups');
+  });
+
+  it('smartlyq social create-account-group -> POST /social/account-groups', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'createAccountGroup'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/account-groups');
+  });
+
+  it('smartlyq social get-account-group -> GET /social/account-groups/{group_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'getAccountGroup'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/account-groups/test-id');
+  });
+
+  it('smartlyq social update-account-group -> PUT /social/account-groups/{group_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'updateAccountGroup'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PUT');
+    expect(calls[0].path).toBe('/social/account-groups/test-id');
+  });
+
+  it('smartlyq social delete-account-group -> DELETE /social/account-groups/{group_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'deleteAccountGroup'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/social/account-groups/test-id');
   });
 });
 
@@ -998,11 +1152,32 @@ describe('webhooks', () => {
     expect(calls[0].path).toBe('/webhooks');
   });
 
+  it('smartlyq webhooks update -> PUT /webhooks/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('webhooks', 'update'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PUT');
+    expect(calls[0].path).toBe('/webhooks/test-id');
+  });
+
   it('smartlyq webhooks delete -> DELETE /webhooks/{id}', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('webhooks', 'delete'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('DELETE');
     expect(calls[0].path).toBe('/webhooks/test-id');
+  });
+
+  it('smartlyq webhooks list-logs -> GET /webhooks/logs', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('webhooks', 'listLogs'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/webhooks/logs');
+  });
+
+  it('smartlyq webhooks test -> POST /webhooks/{id}/test', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('webhooks', 'test'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/webhooks/test-id/test');
   });
 });
 
