@@ -374,6 +374,26 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social instagram-story-insights <account-id> <story-id> [--query <query>]` | `GET /social/accounts/{account_id}/instagram/stories/{story_id}/insights` | Instagram story insights |
 | `smartlyq social x-retweet <account-id> --data <json>` | `POST /social/accounts/{account_id}/x/retweets` | Retweet on X |
 | `smartlyq social x-unretweet <account-id> <tweet-id>` | `DELETE /social/accounts/{account_id}/x/retweets/{tweet_id}` | Undo retweet |
+| `smartlyq social edit-published-post <post-id> --data <json>` | `POST /social/posts/{post_id}/edit` | Edit published post |
+| `smartlyq social update-post-metadata <post-id> --data <json>` | `POST /social/posts/{post_id}/update-metadata` | Update YouTube metadata |
+| `smartlyq social sync-external-posts --data <json>` | `POST /social/posts/sync-external` | Sync external posts |
+| `smartlyq social account-insights <account-id>` | `GET /social/accounts/{account_id}/insights` | Live account insights |
+| `smartlyq social gmb-locations <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/gmb/locations` | List Google locations |
+| `smartlyq social gmb-location <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/gmb/location` | Get business info |
+| `smartlyq social gmb-update-location <account-id> --data <json>` | `PATCH /social/accounts/{account_id}/gmb/location` | Update business info |
+| `smartlyq social gmb-attributes <account-id>` | `GET /social/accounts/{account_id}/gmb/attributes` | Get attributes |
+| `smartlyq social gmb-update-attributes <account-id> --data <json>` | `PUT /social/accounts/{account_id}/gmb/attributes` | Update attributes |
+| `smartlyq social gmb-attribute-metadata <account-id>` | `GET /social/accounts/{account_id}/gmb/attributes/metadata` | Available attributes |
+| `smartlyq social gmb-media <account-id>` | `GET /social/accounts/{account_id}/gmb/media` | List media |
+| `smartlyq social gmb-create-media <account-id> --data <json>` | `POST /social/accounts/{account_id}/gmb/media` | Add photo |
+| `smartlyq social gmb-delete-media <account-id> --data <json>` | `DELETE /social/accounts/{account_id}/gmb/media` | Delete media |
+| `smartlyq social gmb-food-menus <account-id>` | `GET /social/accounts/{account_id}/gmb/food-menus` | Get food menus |
+| `smartlyq social gmb-update-food-menus <account-id> --data <json>` | `PUT /social/accounts/{account_id}/gmb/food-menus` | Update food menus |
+| `smartlyq social gmb-place-actions <account-id>` | `GET /social/accounts/{account_id}/gmb/place-actions` | List place-action links |
+| `smartlyq social gmb-create-place-action <account-id> --data <json>` | `POST /social/accounts/{account_id}/gmb/place-actions` | Create place-action link |
+| `smartlyq social gmb-delete-place-action <account-id> --data <json>` | `DELETE /social/accounts/{account_id}/gmb/place-actions` | Delete place-action link |
+| `smartlyq social gmb-verifications <account-id>` | `GET /social/accounts/{account_id}/gmb/verifications` | List verifications |
+| `smartlyq social gmb-verification-options <account-id> [--data <json>]` | `POST /social/accounts/{account_id}/gmb/verifications/options` | Verification options |
 
 ### URLs
 

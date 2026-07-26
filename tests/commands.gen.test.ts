@@ -1340,6 +1340,146 @@ describe('social', () => {
     expect(calls[0].method).toBe('DELETE');
     expect(calls[0].path).toBe('/social/accounts/test-id/x/retweets/test-id');
   });
+
+  it('smartlyq social edit-published-post -> POST /social/posts/{post_id}/edit', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'editPublishedPost'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/posts/test-id/edit');
+  });
+
+  it('smartlyq social update-post-metadata -> POST /social/posts/{post_id}/update-metadata', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'updatePostMetadata'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/posts/test-id/update-metadata');
+  });
+
+  it('smartlyq social sync-external-posts -> POST /social/posts/sync-external', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'syncExternalPosts'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/posts/sync-external');
+  });
+
+  it('smartlyq social account-insights -> GET /social/accounts/{account_id}/insights', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'accountInsights'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/insights');
+  });
+
+  it('smartlyq social gmb-locations -> GET /social/accounts/{account_id}/gmb/locations', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbLocations'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/locations');
+  });
+
+  it('smartlyq social gmb-location -> GET /social/accounts/{account_id}/gmb/location', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbLocation'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/location');
+  });
+
+  it('smartlyq social gmb-update-location -> PATCH /social/accounts/{account_id}/gmb/location', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbUpdateLocation'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/location');
+  });
+
+  it('smartlyq social gmb-attributes -> GET /social/accounts/{account_id}/gmb/attributes', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbAttributes'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/attributes');
+  });
+
+  it('smartlyq social gmb-update-attributes -> PUT /social/accounts/{account_id}/gmb/attributes', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbUpdateAttributes'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PUT');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/attributes');
+  });
+
+  it('smartlyq social gmb-attribute-metadata -> GET /social/accounts/{account_id}/gmb/attributes/metadata', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbAttributeMetadata'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/attributes/metadata');
+  });
+
+  it('smartlyq social gmb-media -> GET /social/accounts/{account_id}/gmb/media', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbMedia'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/media');
+  });
+
+  it('smartlyq social gmb-create-media -> POST /social/accounts/{account_id}/gmb/media', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbCreateMedia'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/media');
+  });
+
+  it('smartlyq social gmb-delete-media -> DELETE /social/accounts/{account_id}/gmb/media', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbDeleteMedia'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/media');
+  });
+
+  it('smartlyq social gmb-food-menus -> GET /social/accounts/{account_id}/gmb/food-menus', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbFoodMenus'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/food-menus');
+  });
+
+  it('smartlyq social gmb-update-food-menus -> PUT /social/accounts/{account_id}/gmb/food-menus', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbUpdateFoodMenus'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PUT');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/food-menus');
+  });
+
+  it('smartlyq social gmb-place-actions -> GET /social/accounts/{account_id}/gmb/place-actions', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbPlaceActions'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/place-actions');
+  });
+
+  it('smartlyq social gmb-create-place-action -> POST /social/accounts/{account_id}/gmb/place-actions', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbCreatePlaceAction'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/place-actions');
+  });
+
+  it('smartlyq social gmb-delete-place-action -> DELETE /social/accounts/{account_id}/gmb/place-actions', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbDeletePlaceAction'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/place-actions');
+  });
+
+  it('smartlyq social gmb-verifications -> GET /social/accounts/{account_id}/gmb/verifications', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbVerifications'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/verifications');
+  });
+
+  it('smartlyq social gmb-verification-options -> POST /social/accounts/{account_id}/gmb/verifications/options', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbVerificationOptions'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/verifications/options');
+  });
 });
 
 describe('urls', () => {
