@@ -6,6 +6,7 @@
 import { writeFileSync } from 'node:fs';
 import { kebabCase } from '../src/util';
 import { buildModel, type MethodSpec } from './model';
+import { filterToInstalledSdk } from './sdk-filter';
 
 function emitTest(resourceKey: string, m: MethodSpec): string {
   const expectedPath = m.path.replace(/\{[^}]+\}/g, 'test-id');
@@ -25,7 +26,7 @@ function emitTest(resourceKey: string, m: MethodSpec): string {
   ].join('\n');
 }
 
-const resources = buildModel();
+const resources = filterToInstalledSdk(buildModel());
 const blocks: string[] = [];
 
 for (const r of resources) {

@@ -5,6 +5,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { kebabCase } from '../src/util';
 import { buildModel, type MethodSpec } from './model';
+import { filterToInstalledSdk } from './sdk-filter';
 
 const BEGIN = '<!-- BEGIN GENERATED REFERENCE -->';
 const END = '<!-- END GENERATED REFERENCE -->';
@@ -17,7 +18,7 @@ function commandLine(resourceKey: string, m: MethodSpec): string {
   return parts.join(' ');
 }
 
-const resources = buildModel();
+const resources = filterToInstalledSdk(buildModel());
 const lines: string[] = [];
 
 for (const r of resources) {

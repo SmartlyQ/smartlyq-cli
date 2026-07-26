@@ -6,8 +6,9 @@
 import { writeFileSync } from 'node:fs';
 import { kebabCase } from '../src/util';
 import { buildModel } from './model';
+import { filterToInstalledSdk } from './sdk-filter';
 
-const resources = buildModel();
+const resources = filterToInstalledSdk(buildModel());
 const entries: string[] = [];
 
 for (const r of resources) {
