@@ -124,6 +124,55 @@ describe('analytics', () => {
     expect(calls[0].method).toBe('GET');
     expect(calls[0].path).toBe('/analytics/posts/test-id/timeline');
   });
+
+  it('smartlyq analytics inbox-volume -> GET /analytics/inbox/volume', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'inboxVolume'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/inbox/volume');
+  });
+
+  it('smartlyq analytics inbox-heatmap -> GET /analytics/inbox/heatmap', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'inboxHeatmap'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/inbox/heatmap');
+  });
+
+  it('smartlyq analytics inbox-source-breakdown -> GET /analytics/inbox/source-breakdown', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'inboxSourceBreakdown'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/inbox/source-breakdown');
+  });
+
+  it('smartlyq analytics inbox-response-time -> GET /analytics/inbox/response-time', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'inboxResponseTime'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/inbox/response-time');
+  });
+
+  it('smartlyq analytics inbox-top-accounts -> GET /analytics/inbox/top-accounts', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'inboxTopAccounts'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/inbox/top-accounts');
+  });
+
+  it('smartlyq analytics inbox-conversations -> GET /analytics/inbox/conversations', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'inboxConversations'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/inbox/conversations');
+  });
+
+  it('smartlyq analytics inbox-conversation-detail -> GET /analytics/inbox/conversations/{conversation_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('analytics', 'inboxConversationDetail'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/analytics/inbox/conversations/test-id');
+  });
 });
 
 describe('articles', () => {
@@ -176,6 +225,57 @@ describe('audio', () => {
     await dispatch(cmd('audio', 'get'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('GET');
     expect(calls[0].path).toBe('/audio/test-id');
+  });
+});
+
+describe('automations', () => {
+  it('smartlyq automations list -> GET /automations', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('automations', 'list'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/automations');
+  });
+
+  it('smartlyq automations get -> GET /automations/{automation_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('automations', 'get'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/automations/test-id');
+  });
+
+  it('smartlyq automations activate -> POST /automations/{automation_id}/activate', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('automations', 'activate'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/automations/test-id/activate');
+  });
+
+  it('smartlyq automations deactivate -> POST /automations/{automation_id}/deactivate', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('automations', 'deactivate'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/automations/test-id/deactivate');
+  });
+
+  it('smartlyq automations trigger -> POST /automations/{automation_id}/trigger', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('automations', 'trigger'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/automations/test-id/trigger');
+  });
+
+  it('smartlyq automations list-runs -> GET /automations/{automation_id}/runs', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('automations', 'listRuns'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/automations/test-id/runs');
+  });
+
+  it('smartlyq automations get-run -> GET /automations/{automation_id}/runs/{run_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('automations', 'getRun'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/automations/test-id/runs/test-id');
   });
 });
 
@@ -294,6 +394,22 @@ describe('content', () => {
     await dispatch(cmd('content', 'generateCaption'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/content/caption');
+  });
+});
+
+describe('crm', () => {
+  it('smartlyq crm delete-contact -> DELETE /contacts/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crm', 'deleteContact'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/contacts/test-id');
+  });
+
+  it('smartlyq crm bulk-import-contacts -> POST /contacts/bulk', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crm', 'bulkImportContacts'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/contacts/bulk');
   });
 });
 
@@ -665,6 +781,29 @@ describe('profiles', () => {
   });
 });
 
+describe('reviews', () => {
+  it('smartlyq reviews list -> GET /reviews', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('reviews', 'list'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/reviews');
+  });
+
+  it('smartlyq reviews reply-to -> POST /reviews/{review_id}/reply', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('reviews', 'replyTo'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/reviews/test-id/reply');
+  });
+
+  it('smartlyq reviews sync -> POST /reviews/sync', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('reviews', 'sync'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/reviews/sync');
+  });
+});
+
 describe('seo', () => {
   it('smartlyq seo keyword-research -> POST /seo/keyword-research', async () => {
     const { fetchImpl, calls } = mockFetch();
@@ -863,6 +1002,13 @@ describe('social', () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('social', 'updateAccount'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/social/accounts/test-id');
+  });
+
+  it('smartlyq social disconnect-account -> DELETE /social/accounts/{account_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'disconnectAccount'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
     expect(calls[0].path).toBe('/social/accounts/test-id');
   });
 
@@ -1067,6 +1213,104 @@ describe('social', () => {
     await dispatch(cmd('social', 'deleteAccountGroup'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('DELETE');
     expect(calls[0].path).toBe('/social/account-groups/test-id');
+  });
+
+  it('smartlyq social get-conversation -> GET /social/conversations/{conversation_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'getConversation'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/conversations/test-id');
+  });
+
+  it('smartlyq social update-conversation -> PATCH /social/conversations/{conversation_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'updateConversation'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/social/conversations/test-id');
+  });
+
+  it('smartlyq social search-conversations -> GET /social/conversations/search', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'searchConversations'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/conversations/search');
+  });
+
+  it('smartlyq social pinterest-boards -> GET /social/accounts/{account_id}/pinterest/boards', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'pinterestBoards'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/pinterest/boards');
+  });
+
+  it('smartlyq social youtube-playlists -> GET /social/accounts/{account_id}/youtube/playlists', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'youtubePlaylists'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/youtube/playlists');
+  });
+
+  it('smartlyq social instagram-publishing-limit -> GET /social/accounts/{account_id}/instagram/publishing-limit', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'instagramPublishingLimit'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/instagram/publishing-limit');
+  });
+
+  it('smartlyq social gmb-performance -> GET /social/accounts/{account_id}/gmb/performance', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbPerformance'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/performance');
+  });
+
+  it('smartlyq social gmb-search-keywords -> GET /social/accounts/{account_id}/gmb/search-keywords', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbSearchKeywords'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/search-keywords');
+  });
+
+  it('smartlyq social reddit-search -> GET /social/accounts/{account_id}/reddit/search', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'redditSearch'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/reddit/search');
+  });
+
+  it('smartlyq social reddit-feed -> GET /social/accounts/{account_id}/reddit/feed', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'redditFeed'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/reddit/feed');
+  });
+
+  it('smartlyq social reddit-subreddits -> GET /social/accounts/{account_id}/reddit/subreddits', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'redditSubreddits'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/reddit/subreddits');
+  });
+
+  it('smartlyq social reddit-subreddit-rules -> GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}/rules', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'redditSubredditRules'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/reddit/subreddits/test-id/rules');
+  });
+
+  it('smartlyq social instagram-stories -> GET /social/accounts/{account_id}/instagram/stories', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'instagramStories'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/instagram/stories');
+  });
+
+  it('smartlyq social facebook-post-reactions -> GET /social/accounts/{account_id}/facebook/post-reactions', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'facebookPostReactions'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/facebook/post-reactions');
   });
 });
 

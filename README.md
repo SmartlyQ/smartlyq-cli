@@ -106,6 +106,13 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq analytics content-decay [--query <query>]` | `GET /analytics/content-decay` | Content decay |
 | `smartlyq analytics posting-frequency [--query <query>]` | `GET /analytics/posting-frequency` | Posting frequency vs engagement |
 | `smartlyq analytics post-timeline <post-id>` | `GET /analytics/posts/{post_id}/timeline` | Post metric timeline |
+| `smartlyq analytics inbox-volume [--query <query>]` | `GET /analytics/inbox/volume` | Inbox volume |
+| `smartlyq analytics inbox-heatmap [--query <query>]` | `GET /analytics/inbox/heatmap` | Inbox heatmap |
+| `smartlyq analytics inbox-source-breakdown [--query <query>]` | `GET /analytics/inbox/source-breakdown` | Inbox source breakdown |
+| `smartlyq analytics inbox-response-time [--query <query>]` | `GET /analytics/inbox/response-time` | Inbox response time |
+| `smartlyq analytics inbox-top-accounts [--query <query>]` | `GET /analytics/inbox/top-accounts` | Inbox top accounts |
+| `smartlyq analytics inbox-conversations [--query <query>]` | `GET /analytics/inbox/conversations` | Inbox conversation stats |
+| `smartlyq analytics inbox-conversation-detail <conversation-id>` | `GET /analytics/inbox/conversations/{conversation_id}` | Conversation analytics |
 
 ### Articles
 
@@ -123,6 +130,18 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq audio text-to-speech --data <json>` | `POST /audio/text-to-speech` | Text to speech |
 | `smartlyq audio speech-to-text --data <json>` | `POST /audio/speech-to-text` | Speech to text |
 | `smartlyq audio get <audio-id>` | `GET /audio/{audio_id}` | Get audio |
+
+### Automations
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq automations list [--query <query>]` | `GET /automations` | List automations |
+| `smartlyq automations get <automation-id>` | `GET /automations/{automation_id}` | Get automation |
+| `smartlyq automations activate <automation-id>` | `POST /automations/{automation_id}/activate` | Activate automation |
+| `smartlyq automations deactivate <automation-id>` | `POST /automations/{automation_id}/deactivate` | Pause automation |
+| `smartlyq automations trigger <automation-id> [--data <json>]` | `POST /automations/{automation_id}/trigger` | Trigger automation |
+| `smartlyq automations list-runs <automation-id> [--query <query>]` | `GET /automations/{automation_id}/runs` | List runs |
+| `smartlyq automations get-run <automation-id> <run-id>` | `GET /automations/{automation_id}/runs/{run_id}` | Get run |
 
 ### Chatbot
 
@@ -154,6 +173,13 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | --- | --- | --- |
 | `smartlyq content rewrite --data <json>` | `POST /content/rewrite` | Rewrite content |
 | `smartlyq content generate-caption [--data <json>]` | `POST /content/caption` | Generate a social caption |
+
+### CRM
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq crm delete-contact <id>` | `DELETE /contacts/{id}` | Delete contact |
+| `smartlyq crm bulk-import-contacts --data <json>` | `POST /contacts/bulk` | Bulk import contacts |
 
 ### CRM Contacts
 
@@ -250,6 +276,14 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq profiles create-connect-url <id> <platform> [--data <json>]` | `POST /profiles/{id}/connect/{platform}` | Get a raw connect URL for one platform |
 | `smartlyq profiles get-account-billing` | `GET /me/account-billing` | Account billing summary |
 
+### Reviews
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq reviews list [--query <query>]` | `GET /reviews` | List reviews |
+| `smartlyq reviews reply-to <review-id> --data <json>` | `POST /reviews/{review_id}/reply` | Reply to review |
+| `smartlyq reviews sync [--data <json>]` | `POST /reviews/sync` | Sync reviews |
+
 ### SEO
 
 | Command | Endpoint | Description |
@@ -292,6 +326,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social update-post <post-id> --data <json>` | `PATCH /social/posts/{post_id}` | Update social post |
 | `smartlyq social delete-post <post-id>` | `DELETE /social/posts/{post_id}` | Delete social post |
 | `smartlyq social update-account <account-id> --data <json>` | `PATCH /social/accounts/{account_id}` | Rename account |
+| `smartlyq social disconnect-account <account-id>` | `DELETE /social/accounts/{account_id}` | Disconnect a social account |
 | `smartlyq social get-account-health <account-id>` | `GET /social/accounts/{account_id}/health` | Account health |
 | `smartlyq social get-account-reconnect-url <account-id>` | `GET /social/accounts/{account_id}/reconnect-url` | Account reconnect URL |
 | `smartlyq social pause-account <account-id>` | `POST /social/accounts/{account_id}/pause` | Pause posting to an account |
@@ -321,6 +356,20 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social get-account-group <group-id>` | `GET /social/account-groups/{group_id}` | Get account group |
 | `smartlyq social update-account-group <group-id> --data <json>` | `PUT /social/account-groups/{group_id}` | Update account group |
 | `smartlyq social delete-account-group <group-id>` | `DELETE /social/account-groups/{group_id}` | Delete account group |
+| `smartlyq social get-conversation <conversation-id>` | `GET /social/conversations/{conversation_id}` | Get conversation |
+| `smartlyq social update-conversation <conversation-id> --data <json>` | `PATCH /social/conversations/{conversation_id}` | Archive / reopen conversation |
+| `smartlyq social search-conversations [--query <query>]` | `GET /social/conversations/search` | Search conversations |
+| `smartlyq social pinterest-boards <account-id>` | `GET /social/accounts/{account_id}/pinterest/boards` | Pinterest boards |
+| `smartlyq social youtube-playlists <account-id>` | `GET /social/accounts/{account_id}/youtube/playlists` | YouTube playlists |
+| `smartlyq social instagram-publishing-limit <account-id>` | `GET /social/accounts/{account_id}/instagram/publishing-limit` | Instagram publishing limit |
+| `smartlyq social gmb-performance <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/gmb/performance` | Google Business performance |
+| `smartlyq social gmb-search-keywords <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/gmb/search-keywords` | Google Business search keywords |
+| `smartlyq social reddit-search <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/reddit/search` | Reddit search |
+| `smartlyq social reddit-feed <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/reddit/feed` | Reddit feed |
+| `smartlyq social reddit-subreddits <account-id>` | `GET /social/accounts/{account_id}/reddit/subreddits` | Subscribed subreddits |
+| `smartlyq social reddit-subreddit-rules <account-id> <subreddit>` | `GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}/rules` | Subreddit rules |
+| `smartlyq social instagram-stories <account-id>` | `GET /social/accounts/{account_id}/instagram/stories` | Instagram stories |
+| `smartlyq social facebook-post-reactions <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/facebook/post-reactions` | Facebook post reactions |
 
 ### URLs
 
