@@ -399,6 +399,18 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social gmb-verification-options <account-id> [--data <json>]` | `POST /social/accounts/{account_id}/gmb/verifications/options` | Verification options |
 | `smartlyq social reddit-subreddit-info <account-id> <subreddit>` | `GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}` | Subreddit info + eligibility |
 | `smartlyq social x-mentions <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/x/mentions` | X mentions |
+| `smartlyq social send-typing-indicator <conversation-id>` | `POST /social/conversations/{conversation_id}/typing` | Typing indicator |
+| `smartlyq social comment-private-reply <comment-id> --data <json>` | `POST /social/comments/{comment_id}/private-reply` | Private reply (comment-to-DM) |
+| `smartlyq social get-messenger-menu <account-id>` | `GET /social/accounts/{account_id}/messenger/menu` | Get Messenger menu |
+| `smartlyq social set-messenger-menu <account-id> --data <json>` | `PUT /social/accounts/{account_id}/messenger/menu` | Set Messenger menu |
+| `smartlyq social delete-messenger-menu <account-id>` | `DELETE /social/accounts/{account_id}/messenger/menu` | Delete Messenger menu |
+| `smartlyq social get-ice-breakers <account-id>` | `GET /social/accounts/{account_id}/instagram/ice-breakers` | Get ice breakers |
+| `smartlyq social set-ice-breakers <account-id> --data <json>` | `PUT /social/accounts/{account_id}/instagram/ice-breakers` | Set ice breakers |
+| `smartlyq social delete-ice-breakers <account-id>` | `DELETE /social/accounts/{account_id}/instagram/ice-breakers` | Delete ice breakers |
+| `smartlyq social facebook-page-insights <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/facebook/page-insights` | Facebook page insights |
+| `smartlyq social instagram-audience <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/instagram/audience` | Instagram audience demographics |
+| `smartlyq social connect-options <account-id>` | `GET /social/accounts/{account_id}/connect-options` | Connection target options |
+| `smartlyq social connect-select <account-id> --data <json>` | `POST /social/accounts/{account_id}/connect-select` | Select connection target |
 
 ### URLs
 
