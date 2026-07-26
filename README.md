@@ -179,7 +179,9 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | Command | Endpoint | Description |
 | --- | --- | --- |
 | `smartlyq crm delete-contact <id>` | `DELETE /contacts/{id}` | Delete contact |
+| `smartlyq crm update-custom-field <id> --data <json>` | `PATCH /custom-fields/{id}` | Update custom field |
 | `smartlyq crm bulk-import-contacts --data <json>` | `POST /contacts/bulk` | Bulk import contacts |
+| `smartlyq crm contact-channels <id>` | `GET /contacts/{id}/channels` | Contact channels |
 
 ### CRM Contacts
 
@@ -391,9 +393,12 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social gmb-update-food-menus <account-id> --data <json>` | `PUT /social/accounts/{account_id}/gmb/food-menus` | Update food menus |
 | `smartlyq social gmb-place-actions <account-id>` | `GET /social/accounts/{account_id}/gmb/place-actions` | List place-action links |
 | `smartlyq social gmb-create-place-action <account-id> --data <json>` | `POST /social/accounts/{account_id}/gmb/place-actions` | Create place-action link |
+| `smartlyq social gmb-update-place-action <account-id> --data <json>` | `PATCH /social/accounts/{account_id}/gmb/place-actions` | Update place-action link |
 | `smartlyq social gmb-delete-place-action <account-id> --data <json>` | `DELETE /social/accounts/{account_id}/gmb/place-actions` | Delete place-action link |
 | `smartlyq social gmb-verifications <account-id>` | `GET /social/accounts/{account_id}/gmb/verifications` | List verifications |
 | `smartlyq social gmb-verification-options <account-id> [--data <json>]` | `POST /social/accounts/{account_id}/gmb/verifications/options` | Verification options |
+| `smartlyq social reddit-subreddit-info <account-id> <subreddit>` | `GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}` | Subreddit info + eligibility |
+| `smartlyq social x-mentions <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/x/mentions` | X mentions |
 
 ### URLs
 

@@ -405,11 +405,25 @@ describe('crm', () => {
     expect(calls[0].path).toBe('/contacts/test-id');
   });
 
+  it('smartlyq crm update-custom-field -> PATCH /custom-fields/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crm', 'updateCustomField'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/custom-fields/test-id');
+  });
+
   it('smartlyq crm bulk-import-contacts -> POST /contacts/bulk', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('crm', 'bulkImportContacts'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/contacts/bulk');
+  });
+
+  it('smartlyq crm contact-channels -> GET /contacts/{id}/channels', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crm', 'contactChannels'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/contacts/test-id/channels');
   });
 });
 
@@ -1460,6 +1474,13 @@ describe('social', () => {
     expect(calls[0].path).toBe('/social/accounts/test-id/gmb/place-actions');
   });
 
+  it('smartlyq social gmb-update-place-action -> PATCH /social/accounts/{account_id}/gmb/place-actions', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'gmbUpdatePlaceAction'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/social/accounts/test-id/gmb/place-actions');
+  });
+
   it('smartlyq social gmb-delete-place-action -> DELETE /social/accounts/{account_id}/gmb/place-actions', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('social', 'gmbDeletePlaceAction'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
@@ -1479,6 +1500,20 @@ describe('social', () => {
     await dispatch(cmd('social', 'gmbVerificationOptions'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/social/accounts/test-id/gmb/verifications/options');
+  });
+
+  it('smartlyq social reddit-subreddit-info -> GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'redditSubredditInfo'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/reddit/subreddits/test-id');
+  });
+
+  it('smartlyq social x-mentions -> GET /social/accounts/{account_id}/x/mentions', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'xMentions'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/x/mentions');
   });
 });
 
