@@ -43,6 +43,13 @@ describe('account', () => {
     expect(calls[0].method).toBe('GET');
     expect(calls[0].path).toBe('/me/balance');
   });
+
+  it('smartlyq account get-billing -> GET /me/billing', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('account', 'getBilling'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/me/billing');
+  });
 });
 
 describe('captain', () => {
@@ -379,6 +386,13 @@ describe('comments', () => {
     expect(calls[0].method).toBe('DELETE');
     expect(calls[0].path).toBe('/social/comments/test-id');
   });
+
+  it('smartlyq comments get-post -> GET /social/comments/{post_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('comments', 'getPost'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/comments/test-id');
+  });
 });
 
 describe('content', () => {
@@ -496,6 +510,20 @@ describe('contacts', () => {
     await dispatch(cmd('contacts', 'addMessage'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/contacts/test-id/messages');
+  });
+
+  it('smartlyq contacts set-field -> PUT /contacts/{id}/fields/{slug}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('contacts', 'setField'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PUT');
+    expect(calls[0].path).toBe('/contacts/test-id/fields/test-id');
+  });
+
+  it('smartlyq contacts clear-field -> DELETE /contacts/{id}/fields/{slug}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('contacts', 'clearField'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/contacts/test-id/fields/test-id');
   });
 });
 

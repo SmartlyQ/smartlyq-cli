@@ -85,6 +85,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq account get-me` | `GET /me` | Get current user profile |
 | `smartlyq account get-me-usage [--query <query>]` | `GET /me/usage` | Get usage summary |
 | `smartlyq account get-me-balance` | `GET /me/balance` | Get wallet balance |
+| `smartlyq account get-billing` | `GET /me/billing` | Billing overview |
 
 ### AI Captain
 
@@ -166,6 +167,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq comments reply-to <comment-id> --data <json>` | `POST /social/comments/{comment_id}/reply` | Reply to a comment |
 | `smartlyq comments hide <comment-id>` | `POST /social/comments/{comment_id}/hide` | Hide or unhide a comment |
 | `smartlyq comments delete <comment-id>` | `DELETE /social/comments/{comment_id}` | Delete a comment |
+| `smartlyq comments get-post <post-id>` | `GET /social/comments/{post_id}` | Get one post's comments (threaded) |
 
 ### Content
 
@@ -197,6 +199,8 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq contacts add-note <id> --data <json>` | `POST /contacts/{id}/notes` | Add a note to a contact |
 | `smartlyq contacts enroll <id> --data <json>` | `POST /contacts/{id}/enroll` | Enroll a contact in an automation |
 | `smartlyq contacts add-message <id> --data <json>` | `POST /contacts/{id}/messages` | Log a message on a contact's timeline |
+| `smartlyq contacts set-field <id> <slug> --data <json>` | `PUT /contacts/{id}/fields/{slug}` | Set one custom field |
+| `smartlyq contacts clear-field <id> <slug>` | `DELETE /contacts/{id}/fields/{slug}` | Clear one custom field |
 
 ### CRM Custom Fields
 
