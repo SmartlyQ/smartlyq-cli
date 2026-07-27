@@ -1789,6 +1789,50 @@ describe('webhooks', () => {
   });
 });
 
+describe('whats-app', () => {
+  it('smartlyq whats-app send-whats-app-message -> POST /whatsapp/messages', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'sendWhatsAppMessage'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/messages');
+  });
+
+  it('smartlyq whats-app list-whats-app-templates -> GET /whatsapp/templates', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'listWhatsAppTemplates'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/templates');
+  });
+
+  it('smartlyq whats-app create-whats-app-template -> POST /whatsapp/templates', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'createWhatsAppTemplate'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/templates');
+  });
+
+  it('smartlyq whats-app get-whats-app-business-profile -> GET /whatsapp/business-profile', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'getWhatsAppBusinessProfile'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/business-profile');
+  });
+
+  it('smartlyq whats-app update-whats-app-business-profile -> PATCH /whatsapp/business-profile', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'updateWhatsAppBusinessProfile'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/whatsapp/business-profile');
+  });
+
+  it('smartlyq whats-app list-whats-app-phone-numbers -> GET /whatsapp/phone-numbers', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'listWhatsAppPhoneNumbers'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/phone-numbers');
+  });
+});
+
 describe('workspaces', () => {
   it('smartlyq workspaces list -> GET /workspaces', async () => {
     const { fetchImpl, calls } = mockFetch();

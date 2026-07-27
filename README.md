@@ -453,6 +453,17 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq webhooks list-logs [--query <query>]` | `GET /webhooks/logs` | List webhook delivery logs |
 | `smartlyq webhooks test <id>` | `POST /webhooks/{id}/test` | Send test webhook |
 
+### WhatsApp
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq whats-app send-whats-app-message --data <json>` | `POST /whatsapp/messages` | Send a WhatsApp message |
+| `smartlyq whats-app list-whats-app-templates [--query <query>]` | `GET /whatsapp/templates` | List message templates |
+| `smartlyq whats-app create-whats-app-template --data <json>` | `POST /whatsapp/templates` | Create a message template |
+| `smartlyq whats-app get-whats-app-business-profile [--query <query>]` | `GET /whatsapp/business-profile` | Get business profile |
+| `smartlyq whats-app update-whats-app-business-profile --data <json>` | `PATCH /whatsapp/business-profile` | Update business profile |
+| `smartlyq whats-app list-whats-app-phone-numbers [--query <query>]` | `GET /whatsapp/phone-numbers` | List phone numbers |
+
 ### Workspaces
 
 | Command | Endpoint | Description |
