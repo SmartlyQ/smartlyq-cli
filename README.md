@@ -253,6 +253,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq media get <media-id>` | `GET /media/{media_id}` | Get media |
 | `smartlyq media delete <media-id>` | `DELETE /media/{media_id}` | Delete media |
 | `smartlyq media get-upload-url --data <json>` | `POST /media/upload-url` | Get presigned upload URL |
+| `smartlyq media upload-direct --data <json>` | `POST /media/upload-direct` | Upload a file directly |
 
 ### Presentations
 
@@ -270,6 +271,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq profiles list [--query <query>]` | `GET /profiles` | List profiles |
 | `smartlyq profiles create --data <json>` | `POST /profiles` | Create a profile |
 | `smartlyq profiles get <id>` | `GET /profiles/{id}` | Get a profile |
+| `smartlyq profiles update <id> --data <json>` | `PATCH /profiles/{id}` | Update a profile |
 | `smartlyq profiles delete <id> --data <json>` | `DELETE /profiles/{id}` | Delete a profile |
 | `smartlyq profiles list-accounts <id>` | `GET /profiles/{id}/accounts` | List a profile's connected accounts |
 | `smartlyq profiles pause <id>` | `POST /profiles/{id}/pause` | Pause a profile |

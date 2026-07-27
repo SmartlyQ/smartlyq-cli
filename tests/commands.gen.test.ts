@@ -691,6 +691,13 @@ describe('media', () => {
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/media/upload-url');
   });
+
+  it('smartlyq media upload-direct -> POST /media/upload-direct', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('media', 'uploadDirect'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/media/upload-direct');
+  });
 });
 
 describe('presentations', () => {
@@ -742,6 +749,13 @@ describe('profiles', () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('profiles', 'get'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/profiles/test-id');
+  });
+
+  it('smartlyq profiles update -> PATCH /profiles/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('profiles', 'update'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
     expect(calls[0].path).toBe('/profiles/test-id');
   });
 
