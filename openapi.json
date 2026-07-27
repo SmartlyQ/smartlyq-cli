@@ -7555,7 +7555,17 @@
                         "deal.created",
                         "deal.stage_changed",
                         "deal.won",
-                        "deal.lost"
+                        "deal.lost",
+                        "post.scheduled",
+                        "post.cancelled",
+                        "post.recycled",
+                        "post.external.created",
+                        "post.external.updated",
+                        "message.sent",
+                        "conversation.started",
+                        "reaction.received",
+                        "review.new",
+                        "review.updated"
                       ]
                     },
                     "description": "Events to subscribe to. Must be from the 25-event catalog (see the webhooks object in this spec and the Webhooks guide)."
@@ -7764,7 +7774,17 @@
                         "deal.created",
                         "deal.stage_changed",
                         "deal.won",
-                        "deal.lost"
+                        "deal.lost",
+                        "post.scheduled",
+                        "post.cancelled",
+                        "post.recycled",
+                        "post.external.created",
+                        "post.external.updated",
+                        "message.sent",
+                        "conversation.started",
+                        "reaction.received",
+                        "review.new",
+                        "review.updated"
                       ]
                     },
                     "description": "Full replacement list of subscribed events."
@@ -31475,6 +31495,571 @@
         "responses": {
           "200": {
             "description": "Acknowledged. Any 2xx status is treated as delivered."
+          }
+        }
+      }
+    },
+    "post.scheduled": {
+      "post": {
+        "operationId": "webhookPostScheduled",
+        "summary": "post.scheduled",
+        "description": "A post was accepted and queued for a future publish. Delivered as a signed HTTP POST; respond with any 2xx to acknowledge. Retries: 5 attempts, exponential backoff, Retry-After honored on 429.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Stable event id (evt_...). Identical across fan-out and retries; also sent as X-SmartlyQ-Event-Id. Use for deduplication."
+                  },
+                  "event": {
+                    "type": "string",
+                    "const": "post.scheduled"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "post_id": {
+                        "type": "integer"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "scheduled_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "platforms": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged."
+          }
+        }
+      }
+    },
+    "post.cancelled": {
+      "post": {
+        "operationId": "webhookPostCancelled",
+        "summary": "post.cancelled",
+        "description": "A scheduled post was cancelled before publishing. Delivered as a signed HTTP POST; respond with any 2xx to acknowledge. Retries: 5 attempts, exponential backoff, Retry-After honored on 429.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Stable event id (evt_...). Identical across fan-out and retries; also sent as X-SmartlyQ-Event-Id. Use for deduplication."
+                  },
+                  "event": {
+                    "type": "string",
+                    "const": "post.cancelled"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "post_id": {
+                        "type": "integer"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged."
+          }
+        }
+      }
+    },
+    "post.recycled": {
+      "post": {
+        "operationId": "webhookPostRecycled",
+        "summary": "post.recycled",
+        "description": "A recycling chain spawned a new occurrence of a post. Delivered as a signed HTTP POST; respond with any 2xx to acknowledge. Retries: 5 attempts, exponential backoff, Retry-After honored on 429.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Stable event id (evt_...). Identical across fan-out and retries; also sent as X-SmartlyQ-Event-Id. Use for deduplication."
+                  },
+                  "event": {
+                    "type": "string",
+                    "const": "post.recycled"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "post_id": {
+                        "type": "integer",
+                        "description": "The new occurrence."
+                      },
+                      "recycled_from": {
+                        "type": "integer"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "scheduled_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged."
+          }
+        }
+      }
+    },
+    "post.external.created": {
+      "post": {
+        "operationId": "webhookPostExternalCreated",
+        "summary": "post.external.created",
+        "description": "A post authored natively on the platform (not via SmartlyQ) was detected by external sync. Delivered as a signed HTTP POST; respond with any 2xx to acknowledge. Retries: 5 attempts, exponential backoff, Retry-After honored on 429.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Stable event id (evt_...). Identical across fan-out and retries; also sent as X-SmartlyQ-Event-Id. Use for deduplication."
+                  },
+                  "event": {
+                    "type": "string",
+                    "const": "post.external.created"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "post_id": {
+                        "type": "integer"
+                      },
+                      "platform": {
+                        "type": "string"
+                      },
+                      "remote_id": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged."
+          }
+        }
+      }
+    },
+    "post.external.updated": {
+      "post": {
+        "operationId": "webhookPostExternalUpdated",
+        "summary": "post.external.updated",
+        "description": "A synced native post's text or media changed on the platform. Delivered as a signed HTTP POST; respond with any 2xx to acknowledge. Retries: 5 attempts, exponential backoff, Retry-After honored on 429.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Stable event id (evt_...). Identical across fan-out and retries; also sent as X-SmartlyQ-Event-Id. Use for deduplication."
+                  },
+                  "event": {
+                    "type": "string",
+                    "const": "post.external.updated"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "post_id": {
+                        "type": "integer"
+                      },
+                      "platform": {
+                        "type": "string"
+                      },
+                      "remote_id": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged."
+          }
+        }
+      }
+    },
+    "message.sent": {
+      "post": {
+        "operationId": "webhookMessageSent",
+        "summary": "message.sent",
+        "description": "An outbound DM was delivered from the inbox (via app or API). Delivered as a signed HTTP POST; respond with any 2xx to acknowledge. Retries: 5 attempts, exponential backoff, Retry-After honored on 429.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Stable event id (evt_...). Identical across fan-out and retries; also sent as X-SmartlyQ-Event-Id. Use for deduplication."
+                  },
+                  "event": {
+                    "type": "string",
+                    "const": "message.sent"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "platform": {
+                        "type": "string"
+                      },
+                      "conversation_id": {
+                        "type": "integer"
+                      },
+                      "message_id": {
+                        "type": "integer"
+                      },
+                      "remote_message_id": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "content": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged."
+          }
+        }
+      }
+    },
+    "conversation.started": {
+      "post": {
+        "operationId": "webhookConversationStarted",
+        "summary": "conversation.started",
+        "description": "A new inbox conversation was opened with a contact. Delivered as a signed HTTP POST; respond with any 2xx to acknowledge. Retries: 5 attempts, exponential backoff, Retry-After honored on 429.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Stable event id (evt_...). Identical across fan-out and retries; also sent as X-SmartlyQ-Event-Id. Use for deduplication."
+                  },
+                  "event": {
+                    "type": "string",
+                    "const": "conversation.started"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "platform": {
+                        "type": "string"
+                      },
+                      "conversation_id": {
+                        "type": "integer"
+                      },
+                      "participant_name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged."
+          }
+        }
+      }
+    },
+    "reaction.received": {
+      "post": {
+        "operationId": "webhookReactionReceived",
+        "summary": "reaction.received",
+        "description": "A participant added or removed an emoji reaction on a message. Delivered as a signed HTTP POST; respond with any 2xx to acknowledge. Retries: 5 attempts, exponential backoff, Retry-After honored on 429.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Stable event id (evt_...). Identical across fan-out and retries; also sent as X-SmartlyQ-Event-Id. Use for deduplication."
+                  },
+                  "event": {
+                    "type": "string",
+                    "const": "reaction.received"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "platform": {
+                        "type": "string"
+                      },
+                      "action": {
+                        "type": "string"
+                      },
+                      "emoji": {
+                        "type": "string"
+                      },
+                      "conversation_id": {
+                        "type": "integer",
+                        "nullable": true
+                      },
+                      "message_id": {
+                        "type": "integer",
+                        "nullable": true
+                      },
+                      "remote_message_id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged."
+          }
+        }
+      }
+    },
+    "review.new": {
+      "post": {
+        "operationId": "webhookReviewNew",
+        "summary": "review.new",
+        "description": "A new review was posted on a connected account (Google Business). Delivered as a signed HTTP POST; respond with any 2xx to acknowledge. Retries: 5 attempts, exponential backoff, Retry-After honored on 429.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Stable event id (evt_...). Identical across fan-out and retries; also sent as X-SmartlyQ-Event-Id. Use for deduplication."
+                  },
+                  "event": {
+                    "type": "string",
+                    "const": "review.new"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "review_id": {
+                        "type": "integer"
+                      },
+                      "account_id": {
+                        "type": "integer"
+                      },
+                      "platform": {
+                        "type": "string"
+                      },
+                      "rating": {
+                        "type": "integer"
+                      },
+                      "author_name": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged."
+          }
+        }
+      }
+    },
+    "review.updated": {
+      "post": {
+        "operationId": "webhookReviewUpdated",
+        "summary": "review.updated",
+        "description": "A review was edited, or a reply was posted/removed. Delivered as a signed HTTP POST; respond with any 2xx to acknowledge. Retries: 5 attempts, exponential backoff, Retry-After honored on 429.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Stable event id (evt_...). Identical across fan-out and retries; also sent as X-SmartlyQ-Event-Id. Use for deduplication."
+                  },
+                  "event": {
+                    "type": "string",
+                    "const": "review.updated"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "review_id": {
+                        "type": "integer"
+                      },
+                      "account_id": {
+                        "type": "integer"
+                      },
+                      "platform": {
+                        "type": "string"
+                      },
+                      "rating": {
+                        "type": "integer"
+                      },
+                      "author_name": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "reply": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Acknowledged."
           }
         }
       }
