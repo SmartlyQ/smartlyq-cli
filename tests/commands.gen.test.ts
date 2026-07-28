@@ -1357,6 +1357,13 @@ describe('social', () => {
     expect(calls[0].path).toBe('/social/accounts/test-id/pinterest/boards');
   });
 
+  it('smartlyq social create-pinterest-board -> POST /social/accounts/{account_id}/pinterest/boards', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'createPinterestBoard'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/accounts/test-id/pinterest/boards');
+  });
+
   it('smartlyq social youtube-playlists -> GET /social/accounts/{account_id}/youtube/playlists', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('social', 'youtubePlaylists'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
@@ -1692,6 +1699,48 @@ describe('social', () => {
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/social/accounts/test-id/connect-select');
   });
+
+  it('smartlyq social get-facebook-page -> GET /social/accounts/{account_id}/facebook/page', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'getFacebookPage'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/facebook/page');
+  });
+
+  it('smartlyq social update-facebook-page -> PATCH /social/accounts/{account_id}/facebook/page', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'updateFacebookPage'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/social/accounts/test-id/facebook/page');
+  });
+
+  it('smartlyq social update-youtube-playlist -> PATCH /social/accounts/{account_id}/youtube/playlists/{playlist_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'updateYoutubePlaylist'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/social/accounts/test-id/youtube/playlists/test-id');
+  });
+
+  it('smartlyq social list-mentions -> GET /social/accounts/{account_id}/mentions', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'listMentions'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/mentions');
+  });
+
+  it('smartlyq social reply-to-mention -> POST /social/accounts/{account_id}/mentions/{mention_id}/reply', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'replyToMention'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/accounts/test-id/mentions/test-id/reply');
+  });
+
+  it('smartlyq social list-reddit-flairs -> GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}/flairs', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'listRedditFlairs'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/reddit/subreddits/test-id/flairs');
+  });
 });
 
 describe('urls', () => {
@@ -1937,6 +1986,20 @@ describe('whats-app', () => {
     await dispatch(cmd('whatsApp', 'updateDisplayName'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/whatsapp/business-profile/display-name');
+  });
+
+  it('smartlyq whats-app list-template-library -> GET /whatsapp/template-library', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'listTemplateLibrary'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/template-library');
+  });
+
+  it('smartlyq whats-app create-template-from-library -> POST /whatsapp/templates/from-library', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'createTemplateFromLibrary'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/templates/from-library');
   });
 });
 

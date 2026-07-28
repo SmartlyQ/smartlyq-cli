@@ -381,6 +381,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social update-conversation <conversation-id> --data <json>` | `PATCH /social/conversations/{conversation_id}` | Archive / reopen conversation |
 | `smartlyq social search-conversations [--query <query>]` | `GET /social/conversations/search` | Search conversations |
 | `smartlyq social pinterest-boards <account-id>` | `GET /social/accounts/{account_id}/pinterest/boards` | Pinterest boards |
+| `smartlyq social create-pinterest-board <account-id> --data <json>` | `POST /social/accounts/{account_id}/pinterest/boards` | Create a Pinterest board |
 | `smartlyq social youtube-playlists <account-id>` | `GET /social/accounts/{account_id}/youtube/playlists` | YouTube playlists |
 | `smartlyq social instagram-publishing-limit <account-id>` | `GET /social/accounts/{account_id}/instagram/publishing-limit` | Instagram publishing limit |
 | `smartlyq social gmb-performance <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/gmb/performance` | Google Business performance |
@@ -429,6 +430,12 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social instagram-audience <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/instagram/audience` | Instagram audience demographics |
 | `smartlyq social connect-options <account-id>` | `GET /social/accounts/{account_id}/connect-options` | Connection target options |
 | `smartlyq social connect-select <account-id> --data <json>` | `POST /social/accounts/{account_id}/connect-select` | Select connection target |
+| `smartlyq social get-facebook-page <account-id>` | `GET /social/accounts/{account_id}/facebook/page` | Get Facebook page details |
+| `smartlyq social update-facebook-page <account-id> --data <json>` | `PATCH /social/accounts/{account_id}/facebook/page` | Update Facebook page details |
+| `smartlyq social update-youtube-playlist <account-id> <playlist-id> --data <json>` | `PATCH /social/accounts/{account_id}/youtube/playlists/{playlist_id}` | Update a YouTube playlist |
+| `smartlyq social list-mentions <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/mentions` | List mentions |
+| `smartlyq social reply-to-mention <account-id> <mention-id> --data <json>` | `POST /social/accounts/{account_id}/mentions/{mention_id}/reply` | Reply to a mention |
+| `smartlyq social list-reddit-flairs <account-id> <subreddit>` | `GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}/flairs` | List subreddit post flairs |
 
 ### URLs
 
@@ -483,6 +490,8 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq whats-app update-profile-photo --data <json>` | `POST /whatsapp/business-profile/photo` | Set the WhatsApp profile photo |
 | `smartlyq whats-app get-display-name [--query <query>]` | `GET /whatsapp/business-profile/display-name` | Get the WhatsApp display name |
 | `smartlyq whats-app update-display-name --data <json>` | `POST /whatsapp/business-profile/display-name` | Request a WhatsApp display-name change |
+| `smartlyq whats-app list-template-library [--query <query>]` | `GET /whatsapp/template-library` | Browse the shared template library |
+| `smartlyq whats-app create-template-from-library --data <json>` | `POST /whatsapp/templates/from-library` | Adopt a library template |
 
 ### Workspaces
 
