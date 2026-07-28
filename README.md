@@ -114,6 +114,10 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq analytics inbox-top-accounts [--query <query>]` | `GET /analytics/inbox/top-accounts` | Inbox top accounts |
 | `smartlyq analytics inbox-conversations [--query <query>]` | `GET /analytics/inbox/conversations` | Inbox conversation stats |
 | `smartlyq analytics inbox-conversation-detail <conversation-id>` | `GET /analytics/inbox/conversations/{conversation_id}` | Conversation analytics |
+| `smartlyq analytics get-youtube-channel-insights [--query <query>]` | `GET /analytics/youtube/channel-insights` | YouTube channel insights |
+| `smartlyq analytics get-youtube-daily-views [--query <query>]` | `GET /analytics/youtube/daily-views` | YouTube daily views |
+| `smartlyq analytics get-youtube-video-retention [--query <query>]` | `GET /analytics/youtube/video-retention` | YouTube audience retention |
+| `smartlyq analytics get-youtube-demographics [--query <query>]` | `GET /analytics/youtube/demographics` | YouTube viewer demographics |
 
 ### Articles
 
@@ -231,6 +235,8 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq messages list <conversation-id> [--query <query>]` | `GET /social/conversations/{conversation_id}/messages` | List messages in a conversation |
 | `smartlyq messages send <conversation-id> --data <json>` | `POST /social/conversations/{conversation_id}/messages` | Send a direct message |
 | `smartlyq messages mark-conversation-read <conversation-id>` | `POST /social/conversations/{conversation_id}/read` | Mark a conversation read |
+| `smartlyq messages react-to <conversation-id> <message-id> --data <json>` | `POST /social/conversations/{conversation_id}/messages/{message_id}/reactions` | React to a message |
+| `smartlyq messages remove-reaction <conversation-id> <message-id>` | `DELETE /social/conversations/{conversation_id}/messages/{message_id}/reactions` | Remove a message reaction |
 
 ### Images
 
@@ -248,6 +254,12 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq jobs list [--query <query>]` | `GET /jobs` | List jobs |
 | `smartlyq jobs get <job-id>` | `GET /jobs/{job_id}` | Get job |
 | `smartlyq jobs cancel <job-id> [--data <json>]` | `POST /jobs/{job_id}/cancel` | Cancel job |
+
+### Logs
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq logs list [--query <query>]` | `GET /logs` | List developer logs |
 
 ### Media
 
@@ -427,6 +439,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq urls get <url-id>` | `GET /urls/{url_id}` | Get short URL |
 | `smartlyq urls delete <url-id>` | `DELETE /urls/{url_id}` | Delete short URL |
 | `smartlyq urls get-stats <url-id>` | `GET /urls/{url_id}/stats` | Get short URL stats |
+| `smartlyq urls update-short <id> --data <json>` | `PATCH /urls/{id}` | Update a short URL |
 
 ### Videos
 
@@ -452,6 +465,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq webhooks delete <id>` | `DELETE /webhooks/{id}` | Delete webhook |
 | `smartlyq webhooks list-logs [--query <query>]` | `GET /webhooks/logs` | List webhook delivery logs |
 | `smartlyq webhooks test <id>` | `POST /webhooks/{id}/test` | Send test webhook |
+| `smartlyq webhooks replay-delivery <id>` | `POST /webhooks/deliveries/{id}/replay` | Replay a webhook delivery |
 
 ### WhatsApp
 
@@ -463,6 +477,12 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq whats-app get-whats-app-business-profile [--query <query>]` | `GET /whatsapp/business-profile` | Get business profile |
 | `smartlyq whats-app update-whats-app-business-profile --data <json>` | `PATCH /whatsapp/business-profile` | Update business profile |
 | `smartlyq whats-app list-whats-app-phone-numbers [--query <query>]` | `GET /whatsapp/phone-numbers` | List phone numbers |
+| `smartlyq whats-app get-template <name> [--query <query>]` | `GET /whatsapp/templates/{name}` | Get a WhatsApp template |
+| `smartlyq whats-app update-template <name> --data <json>` | `PATCH /whatsapp/templates/{name}` | Update a WhatsApp template |
+| `smartlyq whats-app delete-template <name> [--query <query>]` | `DELETE /whatsapp/templates/{name}` | Delete a WhatsApp template |
+| `smartlyq whats-app update-profile-photo --data <json>` | `POST /whatsapp/business-profile/photo` | Set the WhatsApp profile photo |
+| `smartlyq whats-app get-display-name [--query <query>]` | `GET /whatsapp/business-profile/display-name` | Get the WhatsApp display name |
+| `smartlyq whats-app update-display-name --data <json>` | `POST /whatsapp/business-profile/display-name` | Request a WhatsApp display-name change |
 
 ### Workspaces
 
