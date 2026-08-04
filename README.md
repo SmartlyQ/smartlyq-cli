@@ -492,6 +492,19 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq whats-app get-whats-app-business-profile [--query <query>]` | `GET /whatsapp/business-profile` | Get business profile |
 | `smartlyq whats-app update-whats-app-business-profile --data <json>` | `PATCH /whatsapp/business-profile` | Update business profile |
 | `smartlyq whats-app list-whats-app-phone-numbers [--query <query>]` | `GET /whatsapp/phone-numbers` | List phone numbers |
+| `smartlyq whats-app list-whats-app-flows [--query <query>]` | `GET /whatsapp/flows` | List flows |
+| `smartlyq whats-app create-whats-app-flow --data <json>` | `POST /whatsapp/flows` | Create a flow |
+| `smartlyq whats-app get-whats-app-flow <flow-id> [--query <query>]` | `GET /whatsapp/flows/{flow_id}` | Get flow |
+| `smartlyq whats-app update-whats-app-flow <flow-id> --data <json>` | `PATCH /whatsapp/flows/{flow_id}` | Update flow |
+| `smartlyq whats-app delete-whats-app-flow <flow-id> [--query <query>]` | `DELETE /whatsapp/flows/{flow_id}` | Delete flow |
+| `smartlyq whats-app get-whats-app-flow-json <flow-id> [--query <query>]` | `GET /whatsapp/flows/{flow_id}/json` | Get flow JSON asset |
+| `smartlyq whats-app upload-whats-app-flow-json <flow-id> --data <json>` | `PUT /whatsapp/flows/{flow_id}/json` | Upload flow JSON |
+| `smartlyq whats-app get-whats-app-flow-preview <flow-id> [--query <query>]` | `GET /whatsapp/flows/{flow_id}/preview` | Get flow preview URL |
+| `smartlyq whats-app publish-whats-app-flow <flow-id> --data <json>` | `POST /whatsapp/flows/{flow_id}/publish` | Publish flow |
+| `smartlyq whats-app deprecate-whats-app-flow <flow-id> --data <json>` | `POST /whatsapp/flows/{flow_id}/deprecate` | Deprecate flow |
+| `smartlyq whats-app get-whats-app-blocked-users [--query <query>]` | `GET /whatsapp/block-users` | List blocked users |
+| `smartlyq whats-app block-whats-app-users --data <json>` | `POST /whatsapp/block-users` | Block users |
+| `smartlyq whats-app unblock-whats-app-users --data <json>` | `DELETE /whatsapp/block-users` | Unblock users |
 | `smartlyq whats-app get-template <name> [--query <query>]` | `GET /whatsapp/templates/{name}` | Get a WhatsApp template |
 | `smartlyq whats-app update-template <name> --data <json>` | `PATCH /whatsapp/templates/{name}` | Update a WhatsApp template |
 | `smartlyq whats-app delete-template <name> [--query <query>]` | `DELETE /whatsapp/templates/{name}` | Delete a WhatsApp template |

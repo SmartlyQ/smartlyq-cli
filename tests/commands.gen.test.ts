@@ -2002,6 +2002,97 @@ describe('whats-app', () => {
     expect(calls[0].path).toBe('/whatsapp/phone-numbers');
   });
 
+  it('smartlyq whats-app list-whats-app-flows -> GET /whatsapp/flows', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'listWhatsAppFlows'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/flows');
+  });
+
+  it('smartlyq whats-app create-whats-app-flow -> POST /whatsapp/flows', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'createWhatsAppFlow'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/flows');
+  });
+
+  it('smartlyq whats-app get-whats-app-flow -> GET /whatsapp/flows/{flow_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'getWhatsAppFlow'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/flows/test-id');
+  });
+
+  it('smartlyq whats-app update-whats-app-flow -> PATCH /whatsapp/flows/{flow_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'updateWhatsAppFlow'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/whatsapp/flows/test-id');
+  });
+
+  it('smartlyq whats-app delete-whats-app-flow -> DELETE /whatsapp/flows/{flow_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'deleteWhatsAppFlow'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/whatsapp/flows/test-id');
+  });
+
+  it('smartlyq whats-app get-whats-app-flow-json -> GET /whatsapp/flows/{flow_id}/json', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'getWhatsAppFlowJson'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/flows/test-id/json');
+  });
+
+  it('smartlyq whats-app upload-whats-app-flow-json -> PUT /whatsapp/flows/{flow_id}/json', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'uploadWhatsAppFlowJson'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PUT');
+    expect(calls[0].path).toBe('/whatsapp/flows/test-id/json');
+  });
+
+  it('smartlyq whats-app get-whats-app-flow-preview -> GET /whatsapp/flows/{flow_id}/preview', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'getWhatsAppFlowPreview'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/flows/test-id/preview');
+  });
+
+  it('smartlyq whats-app publish-whats-app-flow -> POST /whatsapp/flows/{flow_id}/publish', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'publishWhatsAppFlow'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/flows/test-id/publish');
+  });
+
+  it('smartlyq whats-app deprecate-whats-app-flow -> POST /whatsapp/flows/{flow_id}/deprecate', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'deprecateWhatsAppFlow'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/flows/test-id/deprecate');
+  });
+
+  it('smartlyq whats-app get-whats-app-blocked-users -> GET /whatsapp/block-users', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'getWhatsAppBlockedUsers'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/block-users');
+  });
+
+  it('smartlyq whats-app block-whats-app-users -> POST /whatsapp/block-users', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'blockWhatsAppUsers'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/block-users');
+  });
+
+  it('smartlyq whats-app unblock-whats-app-users -> DELETE /whatsapp/block-users', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'unblockWhatsAppUsers'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/whatsapp/block-users');
+  });
+
   it('smartlyq whats-app get-template -> GET /whatsapp/templates/{name}', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('whatsApp', 'getTemplate'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
