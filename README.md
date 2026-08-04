@@ -145,6 +145,10 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq automations activate <automation-id>` | `POST /automations/{automation_id}/activate` | Activate automation |
 | `smartlyq automations deactivate <automation-id>` | `POST /automations/{automation_id}/deactivate` | Pause automation |
 | `smartlyq automations trigger <automation-id> [--data <json>]` | `POST /automations/{automation_id}/trigger` | Trigger automation |
+| `smartlyq automations duplicate <automation-id>` | `POST /automations/{automation_id}/duplicate` | Duplicate an automation |
+| `smartlyq automations list-versions <automation-id>` | `GET /automations/{automation_id}/versions` | List automation versions |
+| `smartlyq automations get-version <automation-id> <version>` | `GET /automations/{automation_id}/versions/{version}` | Get one automation version |
+| `smartlyq automations restore-version <automation-id> <version>` | `POST /automations/{automation_id}/versions/{version}/restore` | Restore an automation version |
 | `smartlyq automations list-runs <automation-id> [--query <query>]` | `GET /automations/{automation_id}/runs` | List runs |
 | `smartlyq automations get-run <automation-id> <run-id>` | `GET /automations/{automation_id}/runs/{run_id}` | Get run |
 
@@ -170,6 +174,9 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq comments list [--query <query>]` | `GET /social/comments` | List comments |
 | `smartlyq comments reply-to <comment-id> --data <json>` | `POST /social/comments/{comment_id}/reply` | Reply to a comment |
 | `smartlyq comments hide <comment-id>` | `POST /social/comments/{comment_id}/hide` | Hide or unhide a comment |
+| `smartlyq comments moderate <comment-id> --data <json>` | `POST /social/comments/{comment_id}/moderate` | Approve or reject a comment |
+| `smartlyq comments like <comment-id>` | `POST /social/comments/{comment_id}/like` | Like a comment |
+| `smartlyq comments unlike <comment-id>` | `DELETE /social/comments/{comment_id}/like` | Unlike a comment |
 | `smartlyq comments delete <comment-id>` | `DELETE /social/comments/{comment_id}` | Delete a comment |
 | `smartlyq comments get-post <post-id>` | `GET /social/comments/{post_id}` | Get one post's comments (threaded) |
 
@@ -235,6 +242,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq messages list <conversation-id> [--query <query>]` | `GET /social/conversations/{conversation_id}/messages` | List messages in a conversation |
 | `smartlyq messages send <conversation-id> --data <json>` | `POST /social/conversations/{conversation_id}/messages` | Send a direct message |
 | `smartlyq messages mark-conversation-read <conversation-id>` | `POST /social/conversations/{conversation_id}/read` | Mark a conversation read |
+| `smartlyq messages delete <conversation-id> <message-id>` | `DELETE /social/conversations/{conversation_id}/messages/{message_id}` | Delete a sent message |
 | `smartlyq messages react-to <conversation-id> <message-id> --data <json>` | `POST /social/conversations/{conversation_id}/messages/{message_id}/reactions` | React to a message |
 | `smartlyq messages remove-reaction <conversation-id> <message-id>` | `DELETE /social/conversations/{conversation_id}/messages/{message_id}/reactions` | Remove a message reaction |
 
