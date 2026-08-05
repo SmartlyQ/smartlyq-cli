@@ -505,6 +505,14 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq whats-app get-whats-app-blocked-users [--query <query>]` | `GET /whatsapp/block-users` | List blocked users |
 | `smartlyq whats-app block-whats-app-users --data <json>` | `POST /whatsapp/block-users` | Block users |
 | `smartlyq whats-app unblock-whats-app-users --data <json>` | `DELETE /whatsapp/block-users` | Unblock users |
+| `smartlyq whats-app list-whats-app-sandbox-sessions` | `GET /whatsapp/sandbox/sessions` | List your sandbox sessions |
+| `smartlyq whats-app create-whats-app-sandbox-session --data <json>` | `POST /whatsapp/sandbox/sessions` | Start a sandbox activation |
+| `smartlyq whats-app delete-whats-app-sandbox-session <session-id>` | `DELETE /whatsapp/sandbox/sessions/{session_id}` | Revoke a sandbox session |
+| `smartlyq whats-app send-whats-app-sandbox-message <session-id>` | `POST /whatsapp/sandbox/sessions/{session_id}/send` | Send the sandbox template |
+| `smartlyq whats-app get-whats-app-number-bridge-status <sender-id>` | `GET /whatsapp/numbers/{sender_id}/bridge` | Bridge status |
+| `smartlyq whats-app start-whats-app-number-bridge <sender-id>` | `POST /whatsapp/numbers/{sender_id}/bridge` | Bridge an owned number onto WhatsApp |
+| `smartlyq whats-app request-whats-app-number-bridge-code <sender-id> [--data <json>]` | `POST /whatsapp/numbers/{sender_id}/bridge/request-code` | Request a verification code |
+| `smartlyq whats-app verify-whats-app-number-bridge <sender-id> --data <json>` | `POST /whatsapp/numbers/{sender_id}/bridge/verify` | Submit the verification code |
 | `smartlyq whats-app get-template <name> [--query <query>]` | `GET /whatsapp/templates/{name}` | Get a WhatsApp template |
 | `smartlyq whats-app update-template <name> --data <json>` | `PATCH /whatsapp/templates/{name}` | Update a WhatsApp template |
 | `smartlyq whats-app delete-template <name> [--query <query>]` | `DELETE /whatsapp/templates/{name}` | Delete a WhatsApp template |

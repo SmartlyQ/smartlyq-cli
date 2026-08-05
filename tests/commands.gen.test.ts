@@ -2093,6 +2093,62 @@ describe('whats-app', () => {
     expect(calls[0].path).toBe('/whatsapp/block-users');
   });
 
+  it('smartlyq whats-app list-whats-app-sandbox-sessions -> GET /whatsapp/sandbox/sessions', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'listWhatsAppSandboxSessions'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/sandbox/sessions');
+  });
+
+  it('smartlyq whats-app create-whats-app-sandbox-session -> POST /whatsapp/sandbox/sessions', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'createWhatsAppSandboxSession'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/sandbox/sessions');
+  });
+
+  it('smartlyq whats-app delete-whats-app-sandbox-session -> DELETE /whatsapp/sandbox/sessions/{session_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'deleteWhatsAppSandboxSession'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/whatsapp/sandbox/sessions/test-id');
+  });
+
+  it('smartlyq whats-app send-whats-app-sandbox-message -> POST /whatsapp/sandbox/sessions/{session_id}/send', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'sendWhatsAppSandboxMessage'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/sandbox/sessions/test-id/send');
+  });
+
+  it('smartlyq whats-app get-whats-app-number-bridge-status -> GET /whatsapp/numbers/{sender_id}/bridge', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'getWhatsAppNumberBridgeStatus'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/whatsapp/numbers/test-id/bridge');
+  });
+
+  it('smartlyq whats-app start-whats-app-number-bridge -> POST /whatsapp/numbers/{sender_id}/bridge', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'startWhatsAppNumberBridge'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/numbers/test-id/bridge');
+  });
+
+  it('smartlyq whats-app request-whats-app-number-bridge-code -> POST /whatsapp/numbers/{sender_id}/bridge/request-code', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'requestWhatsAppNumberBridgeCode'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/numbers/test-id/bridge/request-code');
+  });
+
+  it('smartlyq whats-app verify-whats-app-number-bridge -> POST /whatsapp/numbers/{sender_id}/bridge/verify', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('whatsApp', 'verifyWhatsAppNumberBridge'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/whatsapp/numbers/test-id/bridge/verify');
+  });
+
   it('smartlyq whats-app get-template -> GET /whatsapp/templates/{name}', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('whatsApp', 'getTemplate'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
