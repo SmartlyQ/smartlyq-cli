@@ -277,6 +277,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq media get <media-id>` | `GET /media/{media_id}` | Get media |
 | `smartlyq media delete <media-id>` | `DELETE /media/{media_id}` | Delete media |
 | `smartlyq media get-upload-url --data <json>` | `POST /media/upload-url` | Get presigned upload URL |
+| `smartlyq media confirm-upload <media-id>` | `POST /media/{media_id}/confirm` | Confirm a presigned upload |
 | `smartlyq media upload-direct --data <json>` | `POST /media/upload-direct` | Upload a file directly |
 
 ### Presentations

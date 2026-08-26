@@ -827,6 +827,13 @@ describe('media', () => {
     expect(calls[0].path).toBe('/media/upload-url');
   });
 
+  it('smartlyq media confirm-upload -> POST /media/{media_id}/confirm', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('media', 'confirmUpload'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/media/test-id/confirm');
+  });
+
   it('smartlyq media upload-direct -> POST /media/upload-direct', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('media', 'uploadDirect'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
