@@ -52,6 +52,267 @@ describe('account', () => {
   });
 });
 
+describe('ads', () => {
+  it('smartlyq ads list-campaigns -> GET /ads/campaigns', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'listCampaigns'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/campaigns');
+  });
+
+  it('smartlyq ads create-campaign -> POST /ads/campaigns', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'createCampaign'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/campaigns');
+  });
+
+  it('smartlyq ads get-campaign -> GET /ads/campaigns/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'getCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/campaigns/test-id');
+  });
+
+  it('smartlyq ads update-campaign -> PATCH /ads/campaigns/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'updateCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/ads/campaigns/test-id');
+  });
+
+  it('smartlyq ads delete-campaign -> DELETE /ads/campaigns/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'deleteCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/ads/campaigns/test-id');
+  });
+
+  it('smartlyq ads pause-campaign -> POST /ads/campaigns/{id}/pause', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'pauseCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/campaigns/test-id/pause');
+  });
+
+  it('smartlyq ads resume-campaign -> POST /ads/campaigns/{id}/resume', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'resumeCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/campaigns/test-id/resume');
+  });
+
+  it('smartlyq ads duplicate-campaign -> POST /ads/campaigns/{id}/duplicate', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'duplicateCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/campaigns/test-id/duplicate');
+  });
+
+  it('smartlyq ads archive-campaign -> POST /ads/campaigns/{id}/archive', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'archiveCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/campaigns/test-id/archive');
+  });
+
+  it('smartlyq ads bulk-campaign-status -> POST /ads/campaigns/bulk-status', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'bulkCampaignStatus'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/campaigns/bulk-status');
+  });
+
+  it('smartlyq ads list-sets -> GET /ads/ad-sets', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'listSets'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/ad-sets');
+  });
+
+  it('smartlyq ads get-set -> GET /ads/ad-sets/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'getSet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/ad-sets/test-id');
+  });
+
+  it('smartlyq ads delete-set -> DELETE /ads/ad-sets/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'deleteSet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/ads/ad-sets/test-id');
+  });
+
+  it('smartlyq ads pause-set -> POST /ads/ad-sets/{id}/pause', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'pauseSet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/ad-sets/test-id/pause');
+  });
+
+  it('smartlyq ads resume-set -> POST /ads/ad-sets/{id}/resume', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'resumeSet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/ad-sets/test-id/resume');
+  });
+
+  it('smartlyq ads duplicate-set -> POST /ads/ad-sets/{id}/duplicate', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'duplicateSet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/ad-sets/test-id/duplicate');
+  });
+
+  it('smartlyq ads archive-set -> POST /ads/ad-sets/{id}/archive', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'archiveSet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/ad-sets/test-id/archive');
+  });
+
+  it('smartlyq ads list -> GET /ads/ads', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'list'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/ads');
+  });
+
+  it('smartlyq ads get -> GET /ads/ads/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'get'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/ads/test-id');
+  });
+
+  it('smartlyq ads delete -> DELETE /ads/ads/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'delete'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/ads/ads/test-id');
+  });
+
+  it('smartlyq ads pause -> POST /ads/ads/{id}/pause', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'pause'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/ads/test-id/pause');
+  });
+
+  it('smartlyq ads resume -> POST /ads/ads/{id}/resume', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'resume'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/ads/test-id/resume');
+  });
+
+  it('smartlyq ads duplicate -> POST /ads/ads/{id}/duplicate', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'duplicate'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/ads/test-id/duplicate');
+  });
+
+  it('smartlyq ads archive -> POST /ads/ads/{id}/archive', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'archive'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/ads/test-id/archive');
+  });
+
+  it('smartlyq ads list-audiences -> GET /ads/audiences', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'listAudiences'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/audiences');
+  });
+
+  it('smartlyq ads list-pixels -> GET /ads/pixels', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'listPixels'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/pixels');
+  });
+
+  it('smartlyq ads list-lead-forms -> GET /ads/lead-forms', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'listLeadForms'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/lead-forms');
+  });
+
+  it('smartlyq ads create-lead-form -> POST /ads/lead-forms', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'createLeadForm'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/lead-forms');
+  });
+
+  it('smartlyq ads list-creatives -> GET /ads/creatives', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'listCreatives'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/creatives');
+  });
+
+  it('smartlyq ads create-creative -> POST /ads/creatives', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'createCreative'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/creatives');
+  });
+
+  it('smartlyq ads update-creative -> PATCH /ads/creatives/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'updateCreative'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/ads/creatives/test-id');
+  });
+
+  it('smartlyq ads delete-creative -> DELETE /ads/creatives/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'deleteCreative'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/ads/creatives/test-id');
+  });
+
+  it('smartlyq ads list-accounts -> GET /ads/accounts', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'listAccounts'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/accounts');
+  });
+
+  it('smartlyq ads accounts-diagnostics -> GET /ads/accounts/diagnostics', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'accountsDiagnostics'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/accounts/diagnostics');
+  });
+
+  it('smartlyq ads list-audit-log -> GET /ads/audit-log', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'listAuditLog'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/audit-log');
+  });
+
+  it('smartlyq ads audience-estimate -> POST /ads/estimate', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'audienceEstimate'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/estimate');
+  });
+
+  it('smartlyq ads sync-accounts -> POST /ads/sync', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'syncAccounts'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/sync');
+  });
+});
+
 describe('captain', () => {
   it('smartlyq captain send-message -> POST /captain/messages', async () => {
     const { fetchImpl, calls } = mockFetch();

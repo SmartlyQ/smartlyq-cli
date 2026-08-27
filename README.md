@@ -87,6 +87,48 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq account get-me-balance` | `GET /me/balance` | Get wallet balance |
 | `smartlyq account get-billing` | `GET /me/billing` | Billing overview |
 
+### Ads
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq ads list-campaigns [--query <query>]` | `GET /ads/campaigns` | List campaigns |
+| `smartlyq ads create-campaign --data <json>` | `POST /ads/campaigns` | Create a campaign |
+| `smartlyq ads get-campaign <id>` | `GET /ads/campaigns/{id}` | Get a campaign |
+| `smartlyq ads update-campaign <id> --data <json>` | `PATCH /ads/campaigns/{id}` | Update a campaign |
+| `smartlyq ads delete-campaign <id>` | `DELETE /ads/campaigns/{id}` | Delete a campaign |
+| `smartlyq ads pause-campaign <id>` | `POST /ads/campaigns/{id}/pause` | Pause a campaign |
+| `smartlyq ads resume-campaign <id>` | `POST /ads/campaigns/{id}/resume` | Resume a campaign |
+| `smartlyq ads duplicate-campaign <id>` | `POST /ads/campaigns/{id}/duplicate` | Duplicate a campaign |
+| `smartlyq ads archive-campaign <id>` | `POST /ads/campaigns/{id}/archive` | Archive a campaign |
+| `smartlyq ads bulk-campaign-status --data <json>` | `POST /ads/campaigns/bulk-status` | Bulk pause/resume campaigns |
+| `smartlyq ads list-sets [--query <query>]` | `GET /ads/ad-sets` | List ad sets |
+| `smartlyq ads get-set <id>` | `GET /ads/ad-sets/{id}` | Get an ad set |
+| `smartlyq ads delete-set <id>` | `DELETE /ads/ad-sets/{id}` | Delete an ad set |
+| `smartlyq ads pause-set <id>` | `POST /ads/ad-sets/{id}/pause` | Pause an ad set |
+| `smartlyq ads resume-set <id>` | `POST /ads/ad-sets/{id}/resume` | Resume an ad set |
+| `smartlyq ads duplicate-set <id>` | `POST /ads/ad-sets/{id}/duplicate` | Duplicate an ad set |
+| `smartlyq ads archive-set <id>` | `POST /ads/ad-sets/{id}/archive` | Archive an ad set |
+| `smartlyq ads list [--query <query>]` | `GET /ads/ads` | List ads |
+| `smartlyq ads get <id>` | `GET /ads/ads/{id}` | Get an ad |
+| `smartlyq ads delete <id>` | `DELETE /ads/ads/{id}` | Delete an ad |
+| `smartlyq ads pause <id>` | `POST /ads/ads/{id}/pause` | Pause an ad |
+| `smartlyq ads resume <id>` | `POST /ads/ads/{id}/resume` | Resume an ad |
+| `smartlyq ads duplicate <id>` | `POST /ads/ads/{id}/duplicate` | Duplicate an ad |
+| `smartlyq ads archive <id>` | `POST /ads/ads/{id}/archive` | Archive an ad |
+| `smartlyq ads list-audiences [--query <query>]` | `GET /ads/audiences` | List audiences |
+| `smartlyq ads list-pixels [--query <query>]` | `GET /ads/pixels` | List pixels / conversion destinations |
+| `smartlyq ads list-lead-forms [--query <query>]` | `GET /ads/lead-forms` | List lead forms |
+| `smartlyq ads create-lead-form --data <json>` | `POST /ads/lead-forms` | Create a lead form |
+| `smartlyq ads list-creatives [--query <query>]` | `GET /ads/creatives` | List creatives |
+| `smartlyq ads create-creative --data <json>` | `POST /ads/creatives` | Create a creative |
+| `smartlyq ads update-creative <id> --data <json>` | `PATCH /ads/creatives/{id}` | Update a creative |
+| `smartlyq ads delete-creative <id>` | `DELETE /ads/creatives/{id}` | Delete a creative |
+| `smartlyq ads list-accounts` | `GET /ads/accounts` | List connected ad accounts |
+| `smartlyq ads accounts-diagnostics` | `GET /ads/accounts/diagnostics` | Account health and rate-limit diagnostics |
+| `smartlyq ads list-audit-log [--query <query>]` | `GET /ads/audit-log` | List audit log entries |
+| `smartlyq ads audience-estimate --data <json>` | `POST /ads/estimate` | Audience-size estimate |
+| `smartlyq ads sync-accounts` | `POST /ads/sync` | Trigger an account sync |
+
 ### AI Captain
 
 | Command | Endpoint | Description |
