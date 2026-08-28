@@ -1,6 +1,6 @@
 {
   "name": "@smartlyqofficial/cli",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "description": "Official command line for the SmartlyQ API - social posting, AI content generation, SEO, CRM, and more.",
   "keywords": [
     "smartlyq",
@@ -50,7 +50,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@smartlyqofficial/node": "^0.1.25",
+    "@smartlyqofficial/node": "^0.1.26",
     "commander": "^12.1.0"
   },
   "devDependencies": {

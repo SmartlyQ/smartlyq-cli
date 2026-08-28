@@ -228,6 +228,13 @@ describe('ads', () => {
     expect(calls[0].path).toBe('/ads/audiences');
   });
 
+  it('smartlyq ads create-audience -> POST /ads/audiences', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'createAudience'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/ads/audiences');
+  });
+
   it('smartlyq ads list-pixels -> GET /ads/pixels', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('ads', 'listPixels'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
@@ -310,6 +317,27 @@ describe('ads', () => {
     await dispatch(cmd('ads', 'syncAccounts'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/ads/sync');
+  });
+
+  it('smartlyq ads analytics -> GET /ads/analytics', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'analytics'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/analytics');
+  });
+
+  it('smartlyq ads targeting-search -> GET /ads/targeting-search', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'targetingSearch'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/targeting-search');
+  });
+
+  it('smartlyq ads list-page-posts -> GET /ads/pages/{page_id}/posts', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('ads', 'listPagePosts'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/ads/pages/test-id/posts');
   });
 });
 

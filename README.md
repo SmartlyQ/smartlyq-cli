@@ -116,6 +116,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq ads duplicate <id>` | `POST /ads/ads/{id}/duplicate` | Duplicate an ad |
 | `smartlyq ads archive <id>` | `POST /ads/ads/{id}/archive` | Archive an ad |
 | `smartlyq ads list-audiences [--query <query>]` | `GET /ads/audiences` | List audiences |
+| `smartlyq ads create-audience --data <json>` | `POST /ads/audiences` | Create an audience |
 | `smartlyq ads list-pixels [--query <query>]` | `GET /ads/pixels` | List pixels / conversion destinations |
 | `smartlyq ads list-lead-forms [--query <query>]` | `GET /ads/lead-forms` | List lead forms |
 | `smartlyq ads create-lead-form --data <json>` | `POST /ads/lead-forms` | Create a lead form |
@@ -128,6 +129,9 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq ads list-audit-log [--query <query>]` | `GET /ads/audit-log` | List audit log entries |
 | `smartlyq ads audience-estimate --data <json>` | `POST /ads/estimate` | Audience-size estimate |
 | `smartlyq ads sync-accounts` | `POST /ads/sync` | Trigger an account sync |
+| `smartlyq ads analytics [--query <query>]` | `GET /ads/analytics` | Ads performance analytics |
+| `smartlyq ads targeting-search [--query <query>]` | `GET /ads/targeting-search` | Search Meta interest targeting |
+| `smartlyq ads list-page-posts <page-id> [--query <query>]` | `GET /ads/pages/{page_id}/posts` | List a Page's organic posts |
 
 ### AI Captain
 
