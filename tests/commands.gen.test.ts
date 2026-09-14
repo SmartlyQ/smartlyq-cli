@@ -631,6 +631,36 @@ describe('automations', () => {
   });
 });
 
+describe('calendar', () => {
+  it('smartlyq calendar list-event-types -> GET /calendar/event-types', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'listEventTypes'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/calendar/event-types');
+  });
+
+  it('smartlyq calendar list-slots -> GET /calendar/slots', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'listSlots'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/calendar/slots');
+  });
+
+  it('smartlyq calendar create-booking -> POST /calendar/bookings', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'createBooking'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/calendar/bookings');
+  });
+
+  it('smartlyq calendar cancel-booking -> POST /calendar/bookings/{id}/cancel', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'cancelBooking'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/calendar/bookings/test-id/cancel');
+  });
+});
+
 describe('chatbots', () => {
   it('smartlyq chatbots list -> GET /chatbots', async () => {
     const { fetchImpl, calls } = mockFetch();
@@ -807,6 +837,57 @@ describe('crm', () => {
   });
 });
 
+describe('crm-companies', () => {
+  it('smartlyq crm-companies list -> GET /companies', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmCompanies', 'list'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/companies');
+  });
+
+  it('smartlyq crm-companies create -> POST /companies', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmCompanies', 'create'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/companies');
+  });
+
+  it('smartlyq crm-companies get -> GET /companies/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmCompanies', 'get'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/companies/test-id');
+  });
+
+  it('smartlyq crm-companies update -> PATCH /companies/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmCompanies', 'update'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/companies/test-id');
+  });
+
+  it('smartlyq crm-companies delete -> DELETE /companies/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmCompanies', 'delete'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/companies/test-id');
+  });
+
+  it('smartlyq crm-companies link-contact -> POST /companies/{id}/contacts', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmCompanies', 'linkContact'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/companies/test-id/contacts');
+  });
+
+  it('smartlyq crm-companies unlink-contact -> DELETE /companies/{id}/contacts', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmCompanies', 'unlinkContact'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/companies/test-id/contacts');
+  });
+});
+
 describe('contacts', () => {
   it('smartlyq contacts list -> GET /contacts', async () => {
     const { fetchImpl, calls } = mockFetch();
@@ -971,6 +1052,87 @@ describe('opportunities', () => {
     await dispatch(cmd('opportunities', 'updateStatus'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/opportunities/test-id/status');
+  });
+});
+
+describe('crm-tags', () => {
+  it('smartlyq crm-tags list -> GET /tags', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTags', 'list'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/tags');
+  });
+
+  it('smartlyq crm-tags create -> POST /tags', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTags', 'create'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/tags');
+  });
+
+  it('smartlyq crm-tags rename -> POST /tags/rename', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTags', 'rename'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/tags/rename');
+  });
+
+  it('smartlyq crm-tags merge -> POST /tags/merge', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTags', 'merge'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/tags/merge');
+  });
+
+  it('smartlyq crm-tags delete -> POST /tags/delete', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTags', 'delete'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/tags/delete');
+  });
+});
+
+describe('crm-tasks', () => {
+  it('smartlyq crm-tasks list -> GET /tasks', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTasks', 'list'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/tasks');
+  });
+
+  it('smartlyq crm-tasks create -> POST /tasks', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTasks', 'create'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/tasks');
+  });
+
+  it('smartlyq crm-tasks get -> GET /tasks/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTasks', 'get'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/tasks/test-id');
+  });
+
+  it('smartlyq crm-tasks update -> PATCH /tasks/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTasks', 'update'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/tasks/test-id');
+  });
+
+  it('smartlyq crm-tasks delete -> DELETE /tasks/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTasks', 'delete'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/tasks/test-id');
+  });
+
+  it('smartlyq crm-tasks log-time -> POST /tasks/{id}/time', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('crmTasks', 'logTime'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/tasks/test-id/time');
   });
 });
 

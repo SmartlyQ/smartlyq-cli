@@ -198,6 +198,15 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq automations list-runs <automation-id> [--query <query>]` | `GET /automations/{automation_id}/runs` | List runs |
 | `smartlyq automations get-run <automation-id> <run-id>` | `GET /automations/{automation_id}/runs/{run_id}` | Get run |
 
+### Calendar
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq calendar list-event-types` | `GET /calendar/event-types` | List booking pages |
+| `smartlyq calendar list-slots [--query <query>]` | `GET /calendar/slots` | List open slots |
+| `smartlyq calendar create-booking --data <json>` | `POST /calendar/bookings` | Take a booking |
+| `smartlyq calendar cancel-booking <id> [--data <json>]` | `POST /calendar/bookings/{id}/cancel` | Cancel a booking |
+
 ### Chatbot
 
 | Command | Endpoint | Description |
@@ -242,6 +251,18 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq crm bulk-import-contacts --data <json>` | `POST /contacts/bulk` | Bulk import contacts |
 | `smartlyq crm contact-channels <id>` | `GET /contacts/{id}/channels` | Contact channels |
 
+### CRM Companies
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq crm-companies list [--query <query>]` | `GET /companies` | List companies |
+| `smartlyq crm-companies create --data <json>` | `POST /companies` | Create a company |
+| `smartlyq crm-companies get <id>` | `GET /companies/{id}` | Get a company |
+| `smartlyq crm-companies update <id> --data <json>` | `PATCH /companies/{id}` | Update a company |
+| `smartlyq crm-companies delete <id>` | `DELETE /companies/{id}` | Delete a company |
+| `smartlyq crm-companies link-contact <id> --data <json>` | `POST /companies/{id}/contacts` | Link a contact to a company |
+| `smartlyq crm-companies unlink-contact <id> --data <json>` | `DELETE /companies/{id}/contacts` | Unlink a contact from a company |
+
 ### CRM Contacts
 
 | Command | Endpoint | Description |
@@ -279,6 +300,27 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq opportunities update <id> --data <json>` | `PATCH /opportunities/{id}` | Update an opportunity |
 | `smartlyq opportunities delete <id>` | `DELETE /opportunities/{id}` | Delete an opportunity |
 | `smartlyq opportunities update-status <id> --data <json>` | `POST /opportunities/{id}/status` | Update opportunity status |
+
+### CRM Tags
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq crm-tags list` | `GET /tags` | List tags |
+| `smartlyq crm-tags create --data <json>` | `POST /tags` | Create a tag |
+| `smartlyq crm-tags rename --data <json>` | `POST /tags/rename` | Rename a tag |
+| `smartlyq crm-tags merge --data <json>` | `POST /tags/merge` | Merge tags |
+| `smartlyq crm-tags delete --data <json>` | `POST /tags/delete` | Delete a tag |
+
+### CRM Tasks
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq crm-tasks list [--query <query>]` | `GET /tasks` | List tasks |
+| `smartlyq crm-tasks create --data <json>` | `POST /tasks` | Create a task |
+| `smartlyq crm-tasks get <id>` | `GET /tasks/{id}` | Get a task |
+| `smartlyq crm-tasks update <id> --data <json>` | `PATCH /tasks/{id}` | Update a task |
+| `smartlyq crm-tasks delete <id>` | `DELETE /tasks/{id}` | Delete a task |
+| `smartlyq crm-tasks log-time <id> --data <json>` | `POST /tasks/{id}/time` | Log time on a task |
 
 ### Direct Messages
 
