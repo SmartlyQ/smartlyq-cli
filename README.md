@@ -529,6 +529,10 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social connect-select <account-id> --data <json>` | `POST /social/accounts/{account_id}/connect-select` | Select connection target |
 | `smartlyq social get-facebook-page <account-id>` | `GET /social/accounts/{account_id}/facebook/page` | Get Facebook page details |
 | `smartlyq social update-facebook-page <account-id> --data <json>` | `PATCH /social/accounts/{account_id}/facebook/page` | Update Facebook page details |
+| `smartlyq social get-facebook-page-settings <account-id>` | `GET /social/accounts/{account_id}/facebook/page/settings` | Get Facebook page settings |
+| `smartlyq social update-facebook-page-settings <account-id> --data <json>` | `PATCH /social/accounts/{account_id}/facebook/page/settings` | Update Facebook page settings |
+| `smartlyq social set-facebook-page-picture <account-id> --data <json>` | `POST /social/accounts/{account_id}/facebook/page/picture` | Set Facebook page profile picture |
+| `smartlyq social set-facebook-page-cover <account-id> --data <json>` | `POST /social/accounts/{account_id}/facebook/page/cover` | Set Facebook page cover photo |
 | `smartlyq social update-youtube-playlist <account-id> <playlist-id> --data <json>` | `PATCH /social/accounts/{account_id}/youtube/playlists/{playlist_id}` | Update a YouTube playlist |
 | `smartlyq social list-mentions <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/mentions` | List mentions |
 | `smartlyq social reply-to-mention <account-id> <mention-id> --data <json>` | `POST /social/accounts/{account_id}/mentions/{mention_id}/reply` | Reply to a mention |

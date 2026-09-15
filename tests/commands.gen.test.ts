@@ -2228,6 +2228,34 @@ describe('social', () => {
     expect(calls[0].path).toBe('/social/accounts/test-id/facebook/page');
   });
 
+  it('smartlyq social get-facebook-page-settings -> GET /social/accounts/{account_id}/facebook/page/settings', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'getFacebookPageSettings'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/facebook/page/settings');
+  });
+
+  it('smartlyq social update-facebook-page-settings -> PATCH /social/accounts/{account_id}/facebook/page/settings', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'updateFacebookPageSettings'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/social/accounts/test-id/facebook/page/settings');
+  });
+
+  it('smartlyq social set-facebook-page-picture -> POST /social/accounts/{account_id}/facebook/page/picture', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'setFacebookPagePicture'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/accounts/test-id/facebook/page/picture');
+  });
+
+  it('smartlyq social set-facebook-page-cover -> POST /social/accounts/{account_id}/facebook/page/cover', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'setFacebookPageCover'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/social/accounts/test-id/facebook/page/cover');
+  });
+
   it('smartlyq social update-youtube-playlist -> PATCH /social/accounts/{account_id}/youtube/playlists/{playlist_id}', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('social', 'updateYoutubePlaylist'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
