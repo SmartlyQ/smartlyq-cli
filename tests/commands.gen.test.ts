@@ -2256,6 +2256,13 @@ describe('social', () => {
     expect(calls[0].path).toBe('/social/accounts/test-id/facebook/page/cover');
   });
 
+  it('smartlyq social get-facebook-reel-limit -> GET /social/accounts/{account_id}/facebook/reel-limit', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'getFacebookReelLimit'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/facebook/reel-limit');
+  });
+
   it('smartlyq social update-youtube-playlist -> PATCH /social/accounts/{account_id}/youtube/playlists/{playlist_id}', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('social', 'updateYoutubePlaylist'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
