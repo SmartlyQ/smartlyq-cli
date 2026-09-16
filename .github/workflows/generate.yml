@@ -49,8 +49,25 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # npm makes a new version visible in two stages: the version document
+      # and the dist-tag update first, the tarball on the CDN some minutes
+      # later. This job is dispatched the moment the SDK publishes, so it
+      # asks for a version the registry has already called `latest` and then
+      # 404s fetching it. Run #90 died exactly that way - 0.1.36 published
+      # at 09:24, this step 404'd at 09:28, and the same tarball served
+      # fine at 09:43. Retrying is the fix; failing the whole regeneration
+      # over a CDN that is still catching up is not.
       - name: Update SDK dependency to latest
-        run: npm install @smartlyqofficial/node@latest
+        run: |
+          for attempt in $(seq 1 10); do
+            if npm install @smartlyqofficial/node@latest; then
+              exit 0
+            fi
+            echo "::warning::SDK install attempt ${attempt}/10 failed - the tarball may not have propagated yet. Retrying in 60s."
+            sleep 60
+          done
+          echo "::error::@smartlyqofficial/node@latest is still not installable after 10 attempts over ~10 minutes. This is no longer propagation lag - check the SDK publish."
+          exit 1
 
       - name: Fetch latest OpenAPI spec
         run: npm run fetch-spec
