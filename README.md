@@ -275,6 +275,8 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq contacts remove-tags <id> --data <json>` | `DELETE /contacts/{id}/tags` | Remove tags from a contact |
 | `smartlyq contacts list-notes <id>` | `GET /contacts/{id}/notes` | List contact notes |
 | `smartlyq contacts add-note <id> --data <json>` | `POST /contacts/{id}/notes` | Add a note to a contact |
+| `smartlyq contacts update-note <id> <note-id> --data <json>` | `PATCH /contacts/{id}/notes/{note_id}` | Edit a contact note |
+| `smartlyq contacts delete-note <id> <note-id>` | `DELETE /contacts/{id}/notes/{note_id}` | Delete a contact note |
 | `smartlyq contacts enroll <id> --data <json>` | `POST /contacts/{id}/enroll` | Enroll a contact in an automation |
 | `smartlyq contacts add-message <id> --data <json>` | `POST /contacts/{id}/messages` | Log a message on a contact's timeline |
 | `smartlyq contacts set-field <id> <slug> --data <json>` | `PUT /contacts/{id}/fields/{slug}` | Set one custom field |

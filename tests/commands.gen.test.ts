@@ -945,6 +945,20 @@ describe('contacts', () => {
     expect(calls[0].path).toBe('/contacts/test-id/notes');
   });
 
+  it('smartlyq contacts update-note -> PATCH /contacts/{id}/notes/{note_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('contacts', 'updateNote'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/contacts/test-id/notes/test-id');
+  });
+
+  it('smartlyq contacts delete-note -> DELETE /contacts/{id}/notes/{note_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('contacts', 'deleteNote'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/contacts/test-id/notes/test-id');
+  });
+
   it('smartlyq contacts enroll -> POST /contacts/{id}/enroll', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('contacts', 'enroll'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
