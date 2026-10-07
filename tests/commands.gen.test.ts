@@ -1582,6 +1582,13 @@ describe('shorts', () => {
     expect(calls[0].path).toBe('/shorts');
   });
 
+  it('smartlyq shorts list-caption-styles -> GET /shorts/caption-styles', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('shorts', 'listCaptionStyles'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/shorts/caption-styles');
+  });
+
   it('smartlyq shorts get -> GET /shorts/{uid}', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('shorts', 'get'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });

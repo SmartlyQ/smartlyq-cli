@@ -432,6 +432,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | --- | --- | --- |
 | `smartlyq shorts generate [--data <json>]` | `POST /shorts/generate` | Generate viral shorts from a long video |
 | `smartlyq shorts list [--query <query>]` | `GET /shorts` | List shorts jobs |
+| `smartlyq shorts list-caption-styles` | `GET /shorts/caption-styles` | List caption styles for shorts |
 | `smartlyq shorts get <uid>` | `GET /shorts/{uid}` | Get shorts job + clips |
 
 ### Social
