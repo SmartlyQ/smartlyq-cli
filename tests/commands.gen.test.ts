@@ -1595,6 +1595,13 @@ describe('shorts', () => {
     expect(calls[0].method).toBe('GET');
     expect(calls[0].path).toBe('/shorts/test-id');
   });
+
+  it('smartlyq shorts list-languages -> GET /languages', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('shorts', 'listLanguages'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/languages');
+  });
 });
 
 describe('social', () => {
