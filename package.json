@@ -1,6 +1,6 @@
 {
   "name": "@smartlyqofficial/cli",
-  "version": "0.1.58",
+  "version": "0.1.59",
   "description": "Official command line for the SmartlyQ API - social posting, AI content generation, SEO, CRM, and more.",
   "keywords": [
     "smartlyq",
