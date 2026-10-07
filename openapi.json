@@ -39671,7 +39671,7 @@
       },
       "patch": {
         "summary": "Update a video edit",
-        "description": "Change the title (any time, nothing is rebuilt) or the settings (when the edit is ready, completed, or failed after it was ready; otherwise 409). Settings merge over the current ones and are checked again; the edit is rebuilt (status rebuilding, then ready) as a new editor project, so changes made by hand in the editor are kept in the old one. Free, except turning clean_audio on, which bills its minutes. Requires scope `videos:write`.",
+        "description": "Change the title (any time, nothing is rebuilt) or the settings (when the edit is ready, completed, or failed after it was ready; otherwise 409). Settings merge over the current ones and are checked again; the edit is rebuilt (status rebuilding, then ready) as a new editor project, so changes made by hand in the editor are kept in the old one. Free, except turning clean_audio on, which bills its minutes. Requires scope `videos:write`. After 30 days the edit's working files are deleted and settings can no longer be changed (410 EDIT_EXPIRED).",
         "operationId": "updateEdit",
         "tags": [
           "Edits"
@@ -39857,6 +39857,16 @@
           },
           "422": {
             "$ref": "#/components/responses/ValidationError"
+          },
+          "410": {
+            "description": "EDIT_EXPIRED: the edit's working files were deleted 30 days after it finished; create a new edit to change it.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -39864,7 +39874,7 @@
     "/edits/{uid}/export": {
       "post": {
         "summary": "Export a video edit",
-        "description": "Renders the edit to an MP4 (when it is ready or completed; otherwise 409, also while another export runs). Billed per output minute, rounded up, before the render starts; a failed render is refunded and the edit goes back to ready. The result arrives as output_url on GET /v1/edits/{uid} and in the job.completed webhook (stage exported). Requires scope `videos:write`.",
+        "description": "Renders the edit to an MP4 (when it is ready or completed; otherwise 409, also while another export runs). Billed per output minute, rounded up, before the render starts; a failed render is refunded and the edit goes back to ready. The result arrives as output_url on GET /v1/edits/{uid} and in the job.completed webhook (stage exported). Requires scope `videos:write`. Each export is also saved to your workspace Media Library. After 30 days the edit's working files are deleted and it can no longer be exported again (410 EDIT_EXPIRED); earlier exports stay.",
         "operationId": "exportEdit",
         "tags": [
           "Edits"
@@ -39946,6 +39956,16 @@
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
+          },
+          "410": {
+            "description": "EDIT_EXPIRED: the edit's working files were deleted 30 days after it finished; create a new edit to change it.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -42878,7 +42898,7 @@
           "output_url": {
             "type": "string",
             "nullable": true,
-            "description": "The exported MP4 (after POST /v1/edits/{uid}/export)."
+            "description": "The exported MP4 (after POST /v1/edits/{uid}/export). Also saved to your workspace Media Library and never deleted automatically."
           },
           "export_minutes": {
             "type": "integer",
@@ -42900,6 +42920,10 @@
           },
           "updated_at": {
             "type": "string"
+          },
+          "files_expired": {
+            "type": "boolean",
+            "description": "true once the edit's working files (source copy, b-roll) were deleted, 30 days after it finished. Its exports stay; it can no longer be changed or exported again (410 EDIT_EXPIRED)."
           }
         }
       }

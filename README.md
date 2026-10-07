@@ -336,6 +336,17 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq messages react-to <conversation-id> <message-id> --data <json>` | `POST /social/conversations/{conversation_id}/messages/{message_id}/reactions` | React to a message |
 | `smartlyq messages remove-reaction <conversation-id> <message-id>` | `DELETE /social/conversations/{conversation_id}/messages/{message_id}/reactions` | Remove a message reaction |
 
+### Edits
+
+| Command | Endpoint | Description |
+| --- | --- | --- |
+| `smartlyq edits list [--query <query>]` | `GET /edits` | List video edits |
+| `smartlyq edits create --data <json>` | `POST /edits` | Create a video edit |
+| `smartlyq edits list-options` | `GET /edits/options` | List edit options |
+| `smartlyq edits get <uid>` | `GET /edits/{uid}` | Get a video edit |
+| `smartlyq edits update <uid> --data <json>` | `PATCH /edits/{uid}` | Update a video edit |
+| `smartlyq edits export <uid>` | `POST /edits/{uid}/export` | Export a video edit |
+
 ### Images
 
 | Command | Endpoint | Description |

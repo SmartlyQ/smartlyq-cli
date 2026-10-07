@@ -1201,6 +1201,50 @@ describe('messages', () => {
   });
 });
 
+describe('edits', () => {
+  it('smartlyq edits list -> GET /edits', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('edits', 'list'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/edits');
+  });
+
+  it('smartlyq edits create -> POST /edits', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('edits', 'create'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/edits');
+  });
+
+  it('smartlyq edits list-options -> GET /edits/options', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('edits', 'listOptions'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/edits/options');
+  });
+
+  it('smartlyq edits get -> GET /edits/{uid}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('edits', 'get'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/edits/test-id');
+  });
+
+  it('smartlyq edits update -> PATCH /edits/{uid}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('edits', 'update'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/edits/test-id');
+  });
+
+  it('smartlyq edits export -> POST /edits/{uid}/export', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('edits', 'export'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/edits/test-id/export');
+  });
+});
+
 describe('images', () => {
   it('smartlyq images generate -> POST /images/generate', async () => {
     const { fetchImpl, calls } = mockFetch();
