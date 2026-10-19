@@ -1026,6 +1026,13 @@ describe('opportunities', () => {
     expect(calls[0].path).toBe('/pipelines');
   });
 
+  it('smartlyq opportunities list-pipeline-stages -> GET /pipelines/{id}/stages', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('opportunities', 'listPipelineStages'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/pipelines/test-id/stages');
+  });
+
   it('smartlyq opportunities list -> GET /opportunities', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('opportunities', 'list'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });

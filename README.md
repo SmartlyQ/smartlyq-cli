@@ -296,6 +296,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | --- | --- | --- |
 | `smartlyq opportunities list-pipelines` | `GET /pipelines` | List pipelines |
 | `smartlyq opportunities create-pipeline --data <json>` | `POST /pipelines` | Create a pipeline |
+| `smartlyq opportunities list-pipeline-stages <id>` | `GET /pipelines/{id}/stages` | List a pipeline's stages |
 | `smartlyq opportunities list [--query <query>]` | `GET /opportunities` | List opportunities |
 | `smartlyq opportunities create --data <json>` | `POST /opportunities` | Create an opportunity |
 | `smartlyq opportunities get <id>` | `GET /opportunities/{id}` | Get an opportunity |
