@@ -90,14 +90,14 @@ describe('ads', () => {
 
   it('smartlyq ads pause-campaign -> POST /ads/campaigns/{id}/pause', async () => {
     const { fetchImpl, calls } = mockFetch();
-    await dispatch(cmd('ads', 'pauseCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    await dispatch(cmd('ads', 'pauseCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/ads/campaigns/test-id/pause');
   });
 
   it('smartlyq ads resume-campaign -> POST /ads/campaigns/{id}/resume', async () => {
     const { fetchImpl, calls } = mockFetch();
-    await dispatch(cmd('ads', 'resumeCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    await dispatch(cmd('ads', 'resumeCampaign'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/ads/campaigns/test-id/resume');
   });
@@ -146,14 +146,14 @@ describe('ads', () => {
 
   it('smartlyq ads pause-set -> POST /ads/ad-sets/{id}/pause', async () => {
     const { fetchImpl, calls } = mockFetch();
-    await dispatch(cmd('ads', 'pauseSet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    await dispatch(cmd('ads', 'pauseSet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/ads/ad-sets/test-id/pause');
   });
 
   it('smartlyq ads resume-set -> POST /ads/ad-sets/{id}/resume', async () => {
     const { fetchImpl, calls } = mockFetch();
-    await dispatch(cmd('ads', 'resumeSet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    await dispatch(cmd('ads', 'resumeSet'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/ads/ad-sets/test-id/resume');
   });
@@ -195,14 +195,14 @@ describe('ads', () => {
 
   it('smartlyq ads pause -> POST /ads/ads/{id}/pause', async () => {
     const { fetchImpl, calls } = mockFetch();
-    await dispatch(cmd('ads', 'pause'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    await dispatch(cmd('ads', 'pause'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/ads/ads/test-id/pause');
   });
 
   it('smartlyq ads resume -> POST /ads/ads/{id}/resume', async () => {
     const { fetchImpl, calls } = mockFetch();
-    await dispatch(cmd('ads', 'resume'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    await dispatch(cmd('ads', 'resume'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/ads/ads/test-id/resume');
   });

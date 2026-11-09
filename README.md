@@ -96,23 +96,23 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq ads get-campaign <id>` | `GET /ads/campaigns/{id}` | Get a campaign |
 | `smartlyq ads update-campaign <id> --data <json>` | `PATCH /ads/campaigns/{id}` | Update a campaign |
 | `smartlyq ads delete-campaign <id>` | `DELETE /ads/campaigns/{id}` | Delete a campaign |
-| `smartlyq ads pause-campaign <id>` | `POST /ads/campaigns/{id}/pause` | Pause a campaign |
-| `smartlyq ads resume-campaign <id>` | `POST /ads/campaigns/{id}/resume` | Resume a campaign |
+| `smartlyq ads pause-campaign <id> [--data <json>]` | `POST /ads/campaigns/{id}/pause` | Pause a campaign |
+| `smartlyq ads resume-campaign <id> [--data <json>]` | `POST /ads/campaigns/{id}/resume` | Resume a campaign |
 | `smartlyq ads duplicate-campaign <id>` | `POST /ads/campaigns/{id}/duplicate` | Duplicate a campaign |
 | `smartlyq ads archive-campaign <id>` | `POST /ads/campaigns/{id}/archive` | Archive a campaign |
 | `smartlyq ads bulk-campaign-status --data <json>` | `POST /ads/campaigns/bulk-status` | Bulk pause/resume campaigns |
 | `smartlyq ads list-sets [--query <query>]` | `GET /ads/ad-sets` | List ad sets |
 | `smartlyq ads get-set <id>` | `GET /ads/ad-sets/{id}` | Get an ad set |
 | `smartlyq ads delete-set <id>` | `DELETE /ads/ad-sets/{id}` | Delete an ad set |
-| `smartlyq ads pause-set <id>` | `POST /ads/ad-sets/{id}/pause` | Pause an ad set |
-| `smartlyq ads resume-set <id>` | `POST /ads/ad-sets/{id}/resume` | Resume an ad set |
+| `smartlyq ads pause-set <id> [--data <json>]` | `POST /ads/ad-sets/{id}/pause` | Pause an ad set |
+| `smartlyq ads resume-set <id> [--data <json>]` | `POST /ads/ad-sets/{id}/resume` | Resume an ad set |
 | `smartlyq ads duplicate-set <id>` | `POST /ads/ad-sets/{id}/duplicate` | Duplicate an ad set |
 | `smartlyq ads archive-set <id>` | `POST /ads/ad-sets/{id}/archive` | Archive an ad set |
 | `smartlyq ads list [--query <query>]` | `GET /ads/ads` | List ads |
 | `smartlyq ads get <id>` | `GET /ads/ads/{id}` | Get an ad |
 | `smartlyq ads delete <id>` | `DELETE /ads/ads/{id}` | Delete an ad |
-| `smartlyq ads pause <id>` | `POST /ads/ads/{id}/pause` | Pause an ad |
-| `smartlyq ads resume <id>` | `POST /ads/ads/{id}/resume` | Resume an ad |
+| `smartlyq ads pause <id> [--data <json>]` | `POST /ads/ads/{id}/pause` | Pause an ad |
+| `smartlyq ads resume <id> [--data <json>]` | `POST /ads/ads/{id}/resume` | Resume an ad |
 | `smartlyq ads duplicate <id>` | `POST /ads/ads/{id}/duplicate` | Duplicate an ad |
 | `smartlyq ads archive <id>` | `POST /ads/ads/{id}/archive` | Archive an ad |
 | `smartlyq ads list-audiences [--query <query>]` | `GET /ads/audiences` | List audiences |
@@ -147,7 +147,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | --- | --- | --- |
 | `smartlyq analytics get-overview [--query <query>]` | `GET /analytics/overview` | Get analytics overview |
 | `smartlyq analytics get-posts [--query <query>]` | `GET /analytics/posts` | Get post analytics |
-| `smartlyq analytics get-account <account-id> [--query <query>]` | `GET /analytics/accounts/{account_id}` | Get account analytics |
+| `smartlyq analytics get-account <account-id>` | `GET /analytics/accounts/{account_id}` | Get account analytics |
 | `smartlyq analytics daily-metrics [--query <query>]` | `GET /analytics/daily-metrics` | Daily metrics |
 | `smartlyq analytics best-time [--query <query>]` | `GET /analytics/best-time` | Best time to post |
 | `smartlyq analytics content-decay [--query <query>]` | `GET /analytics/content-decay` | Content decay |
