@@ -646,6 +646,13 @@ describe('calendar', () => {
     expect(calls[0].path).toBe('/calendar/slots');
   });
 
+  it('smartlyq calendar list-bookings -> GET /calendar/bookings', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'listBookings'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/calendar/bookings');
+  });
+
   it('smartlyq calendar create-booking -> POST /calendar/bookings', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('calendar', 'createBooking'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
@@ -658,6 +665,104 @@ describe('calendar', () => {
     await dispatch(cmd('calendar', 'cancelBooking'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
     expect(calls[0].method).toBe('POST');
     expect(calls[0].path).toBe('/calendar/bookings/test-id/cancel');
+  });
+
+  it('smartlyq calendar get-booking -> GET /calendar/bookings/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'getBooking'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/calendar/bookings/test-id');
+  });
+
+  it('smartlyq calendar set-booking-status -> POST /calendar/bookings/{id}/status', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'setBookingStatus'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/calendar/bookings/test-id/status');
+  });
+
+  it('smartlyq calendar reschedule-booking -> POST /calendar/bookings/{id}/reschedule', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'rescheduleBooking'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/calendar/bookings/test-id/reschedule');
+  });
+
+  it('smartlyq calendar list-booking-notes -> GET /calendar/bookings/{id}/notes', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'listBookingNotes'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/calendar/bookings/test-id/notes');
+  });
+
+  it('smartlyq calendar add-booking-note -> POST /calendar/bookings/{id}/notes', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'addBookingNote'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/calendar/bookings/test-id/notes');
+  });
+
+  it('smartlyq calendar delete-booking-note -> DELETE /calendar/bookings/{id}/notes/{note_id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'deleteBookingNote'), ['test-id', 'test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/calendar/bookings/test-id/notes/test-id');
+  });
+
+  it('smartlyq calendar list-blocked-times -> GET /calendar/blocked-times', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'listBlockedTimes'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/calendar/blocked-times');
+  });
+
+  it('smartlyq calendar create-blocked-time -> POST /calendar/blocked-times', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'createBlockedTime'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/calendar/blocked-times');
+  });
+
+  it('smartlyq calendar delete-blocked-time -> DELETE /calendar/blocked-times/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'deleteBlockedTime'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/calendar/blocked-times/test-id');
+  });
+
+  it('smartlyq calendar list-availability-schedules -> GET /calendar/availability', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'listAvailabilitySchedules'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/calendar/availability');
+  });
+
+  it('smartlyq calendar create-availability-schedule -> POST /calendar/availability', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'createAvailabilitySchedule'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('POST');
+    expect(calls[0].path).toBe('/calendar/availability');
+  });
+
+  it('smartlyq calendar update-availability-schedule -> PATCH /calendar/availability/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'updateAvailabilitySchedule'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx', data: '{}' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('PATCH');
+    expect(calls[0].path).toBe('/calendar/availability/test-id');
+  });
+
+  it('smartlyq calendar delete-availability-schedule -> DELETE /calendar/availability/{id}', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'deleteAvailabilitySchedule'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('DELETE');
+    expect(calls[0].path).toBe('/calendar/availability/test-id');
+  });
+
+  it('smartlyq calendar list-busy-times -> GET /calendar/busy-times', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('calendar', 'listBusyTimes'), [], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/calendar/busy-times');
   });
 });
 

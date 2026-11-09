@@ -204,8 +204,23 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | --- | --- | --- |
 | `smartlyq calendar list-event-types` | `GET /calendar/event-types` | List booking pages |
 | `smartlyq calendar list-slots [--query <query>]` | `GET /calendar/slots` | List open slots |
+| `smartlyq calendar list-bookings [--query <query>]` | `GET /calendar/bookings` | List bookings |
 | `smartlyq calendar create-booking --data <json>` | `POST /calendar/bookings` | Take a booking |
 | `smartlyq calendar cancel-booking <id> [--data <json>]` | `POST /calendar/bookings/{id}/cancel` | Cancel a booking |
+| `smartlyq calendar get-booking <id>` | `GET /calendar/bookings/{id}` | Get a booking |
+| `smartlyq calendar set-booking-status <id> --data <json>` | `POST /calendar/bookings/{id}/status` | Set a booking's status |
+| `smartlyq calendar reschedule-booking <id> --data <json>` | `POST /calendar/bookings/{id}/reschedule` | Reschedule a booking |
+| `smartlyq calendar list-booking-notes <id>` | `GET /calendar/bookings/{id}/notes` | List booking notes |
+| `smartlyq calendar add-booking-note <id> --data <json>` | `POST /calendar/bookings/{id}/notes` | Add a booking note |
+| `smartlyq calendar delete-booking-note <id> <note-id>` | `DELETE /calendar/bookings/{id}/notes/{note_id}` | Delete a booking note |
+| `smartlyq calendar list-blocked-times [--query <query>]` | `GET /calendar/blocked-times` | List blocked time |
+| `smartlyq calendar create-blocked-time --data <json>` | `POST /calendar/blocked-times` | Block off time |
+| `smartlyq calendar delete-blocked-time <id>` | `DELETE /calendar/blocked-times/{id}` | Free blocked time |
+| `smartlyq calendar list-availability-schedules` | `GET /calendar/availability` | List availability schedules |
+| `smartlyq calendar create-availability-schedule --data <json>` | `POST /calendar/availability` | Create an availability schedule |
+| `smartlyq calendar update-availability-schedule <id> [--data <json>]` | `PATCH /calendar/availability/{id}` | Update an availability schedule |
+| `smartlyq calendar delete-availability-schedule <id>` | `DELETE /calendar/availability/{id}` | Delete an availability schedule |
+| `smartlyq calendar list-busy-times [--query <query>]` | `GET /calendar/busy-times` | List busy times |
 
 ### Chatbot
 
