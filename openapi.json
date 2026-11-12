@@ -43133,13 +43133,43 @@
           },
           "post_urls": {
             "type": "object",
-            "description": "Per-platform permalinks of the published posts, keyed by platform (arrays of URLs). Three reserved keys: _errors holds per-platform failure reasons (plus _post for a whole-post failure), _transcodes lists what auto-transcode fixed per platform (e.g. 'Frame rate was 15fps (below the 23fps minimum); raised to 30fps.'), and _publish_notes holds the raw form of publish_notes - read publish_notes instead.",
+            "description": "Per-platform permalinks of the published posts: an object keyed by platform name, each an array of URLs. Platform keys only; an empty object {} until something is published. Why a platform failed is in errors; extra steps that did not go as asked are in publish_notes.",
             "additionalProperties": true
           },
           "post_ids": {
             "type": "object",
-            "description": "Per-platform remote post IDs assigned by each platform, keyed by platform.",
+            "description": "Per-platform remote post IDs assigned by each platform: an object keyed by platform name, each an array of IDs (a single ID comes as a one-item array). Platform keys only; an empty object {} until something is published.",
             "additionalProperties": true
+          },
+          "errors": {
+            "type": "array",
+            "description": "Why the post failed, per platform, worded by our error catalog (never the platform's raw text). Present on failed and partially_published posts, an empty list otherwise. platform is null when the whole post failed (for example before any platform was tried). detail holds the reason in full when we wrote it ourselves (a validation rule, a post stopped mid-publish, a Google Business rejection after review), else null. Returned by GET and PATCH /social/posts/{post_id}.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "platform": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "instagram"
+                },
+                "code": {
+                  "type": "string",
+                  "example": "ACCOUNT_TOKEN_INVALID"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "The connection token for this platform account has expired or been revoked."
+                },
+                "retryable": {
+                  "type": "boolean"
+                },
+                "detail": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": "Publishing stopped before it finished. Some accounts may already have this post - check them before retrying."
+                }
+              }
+            }
           },
           "publish_notes": {
             "type": "array",
