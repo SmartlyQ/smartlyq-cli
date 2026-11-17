@@ -210,6 +210,9 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq calendar get-booking <id>` | `GET /calendar/bookings/{id}` | Get a booking |
 | `smartlyq calendar set-booking-status <id> --data <json>` | `POST /calendar/bookings/{id}/status` | Set a booking's status |
 | `smartlyq calendar reschedule-booking <id> --data <json>` | `POST /calendar/bookings/{id}/reschedule` | Reschedule a booking |
+| `smartlyq calendar decline-booking <id> [--data <json>]` | `POST /calendar/bookings/{id}/decline` | Decline a booking |
+| `smartlyq calendar mark-booking-no-show <id> --data <json>` | `POST /calendar/bookings/{id}/no-show` | Mark who did not come |
+| `smartlyq calendar add-booking-guests <id> --data <json>` | `POST /calendar/bookings/{id}/guests` | Add guests to a booking |
 | `smartlyq calendar list-booking-notes <id>` | `GET /calendar/bookings/{id}/notes` | List booking notes |
 | `smartlyq calendar add-booking-note <id> --data <json>` | `POST /calendar/bookings/{id}/notes` | Add a booking note |
 | `smartlyq calendar delete-booking-note <id> <note-id>` | `DELETE /calendar/bookings/{id}/notes/{note_id}` | Delete a booking note |
