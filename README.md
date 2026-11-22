@@ -477,7 +477,7 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social get-post <post-id>` | `GET /social/posts/{post_id}` | Get social post |
 | `smartlyq social update-post <post-id> --data <json>` | `PATCH /social/posts/{post_id}` | Update social post |
 | `smartlyq social delete-post <post-id>` | `DELETE /social/posts/{post_id}` | Delete social post |
-| `smartlyq social update-account <account-id> --data <json>` | `PATCH /social/accounts/{account_id}` | Rename account |
+| `smartlyq social update-account <account-id> --data <json>` | `PATCH /social/accounts/{account_id}` | Update account |
 | `smartlyq social disconnect-account <account-id>` | `DELETE /social/accounts/{account_id}` | Disconnect a social account |
 | `smartlyq social get-account-health <account-id>` | `GET /social/accounts/{account_id}/health` | Account health |
 | `smartlyq social get-account-reconnect-url <account-id>` | `GET /social/accounts/{account_id}/reconnect-url` | Account reconnect URL |
