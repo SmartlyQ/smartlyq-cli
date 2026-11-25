@@ -2461,6 +2461,20 @@ describe('social', () => {
     expect(calls[0].path).toBe('/social/accounts/test-id/facebook/page/cover');
   });
 
+  it('smartlyq social list-community-authors -> GET /social/accounts/{account_id}/community/authors', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'listCommunityAuthors'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/community/authors');
+  });
+
+  it('smartlyq social get-community-limits -> GET /social/accounts/{account_id}/community/limits', async () => {
+    const { fetchImpl, calls } = mockFetch();
+    await dispatch(cmd('social', 'getCommunityLimits'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });
+    expect(calls[0].method).toBe('GET');
+    expect(calls[0].path).toBe('/social/accounts/test-id/community/limits');
+  });
+
   it('smartlyq social get-facebook-reel-limit -> GET /social/accounts/{account_id}/facebook/reel-limit', async () => {
     const { fetchImpl, calls } = mockFetch();
     await dispatch(cmd('social', 'getFacebookReelLimit'), ['test-id'], { apiKey: 'sqk_test_xxxxxxxxxxxx' }, { fetch: fetchImpl, maxRetries: 0 });

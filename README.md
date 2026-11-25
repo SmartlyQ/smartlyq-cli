@@ -567,6 +567,8 @@ Full request/response documentation lives at [docs.smartlyq.com](https://docs.sm
 | `smartlyq social update-facebook-page-settings <account-id> --data <json>` | `PATCH /social/accounts/{account_id}/facebook/page/settings` | Update Facebook page settings |
 | `smartlyq social set-facebook-page-picture <account-id> --data <json>` | `POST /social/accounts/{account_id}/facebook/page/picture` | Set Facebook page profile picture |
 | `smartlyq social set-facebook-page-cover <account-id> --data <json>` | `POST /social/accounts/{account_id}/facebook/page/cover` | Set Facebook page cover photo |
+| `smartlyq social list-community-authors <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/community/authors` | Community authors |
+| `smartlyq social get-community-limits <account-id>` | `GET /social/accounts/{account_id}/community/limits` | Community planner limits |
 | `smartlyq social get-facebook-reel-limit <account-id>` | `GET /social/accounts/{account_id}/facebook/reel-limit` | Get Facebook Reel limit |
 | `smartlyq social update-youtube-playlist <account-id> <playlist-id> --data <json>` | `PATCH /social/accounts/{account_id}/youtube/playlists/{playlist_id}` | Update a YouTube playlist |
 | `smartlyq social list-mentions <account-id> [--query <query>]` | `GET /social/accounts/{account_id}/mentions` | List mentions |
